@@ -1,0 +1,16 @@
+nolanembedded\tasks.o: ..\Middleware\FreeRTOS\Src\tasks.c
+nolanembedded\tasks.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+nolanembedded\tasks.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
+nolanembedded\tasks.o: ../Middleware/FreeRTOS/Inc/FreeRTOS.h
+nolanembedded\tasks.o: D:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+nolanembedded\tasks.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+nolanembedded\tasks.o: ../Inc/FreeRTOSConfig.h
+nolanembedded\tasks.o: ../Middleware/FreeRTOS/Inc/projdefs.h
+nolanembedded\tasks.o: ../Middleware/FreeRTOS/Inc/portable.h
+nolanembedded\tasks.o: ../Middleware/FreeRTOS/Inc/deprecated_definitions.h
+nolanembedded\tasks.o: ../Middleware/FreeRTOS/Port/portmacro.h
+nolanembedded\tasks.o: ../Middleware/FreeRTOS/Inc/mpu_wrappers.h
+nolanembedded\tasks.o: ../Middleware/FreeRTOS/Inc/task.h
+nolanembedded\tasks.o: ../Middleware/FreeRTOS/Inc/list.h
+nolanembedded\tasks.o: ../Middleware/FreeRTOS/Inc/timers.h
+nolanembedded\tasks.o: ../Middleware/FreeRTOS/Inc/stack_macros.h

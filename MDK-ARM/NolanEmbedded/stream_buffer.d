@@ -1,0 +1,14 @@
+nolanembedded\stream_buffer.o: ..\Middleware\FreeRTOS\Src\stream_buffer.c
+nolanembedded\stream_buffer.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+nolanembedded\stream_buffer.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
+nolanembedded\stream_buffer.o: ../Middleware/FreeRTOS/Inc/FreeRTOS.h
+nolanembedded\stream_buffer.o: D:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+nolanembedded\stream_buffer.o: ../Inc/FreeRTOSConfig.h
+nolanembedded\stream_buffer.o: ../Middleware/FreeRTOS/Inc/projdefs.h
+nolanembedded\stream_buffer.o: ../Middleware/FreeRTOS/Inc/portable.h
+nolanembedded\stream_buffer.o: ../Middleware/FreeRTOS/Inc/deprecated_definitions.h
+nolanembedded\stream_buffer.o: ../Middleware/FreeRTOS/Port/portmacro.h
+nolanembedded\stream_buffer.o: ../Middleware/FreeRTOS/Inc/mpu_wrappers.h
+nolanembedded\stream_buffer.o: ../Middleware/FreeRTOS/Inc/task.h
+nolanembedded\stream_buffer.o: ../Middleware/FreeRTOS/Inc/list.h
+nolanembedded\stream_buffer.o: ../Middleware/FreeRTOS/Inc/stream_buffer.h

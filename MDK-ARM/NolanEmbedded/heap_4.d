@@ -1,0 +1,14 @@
+nolanembedded\heap_4.o: ..\Middleware\FreeRTOS\Port\heap_4.c
+nolanembedded\heap_4.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+nolanembedded\heap_4.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
+nolanembedded\heap_4.o: ../Middleware/FreeRTOS/Inc/FreeRTOS.h
+nolanembedded\heap_4.o: D:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+nolanembedded\heap_4.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+nolanembedded\heap_4.o: ../Inc/FreeRTOSConfig.h
+nolanembedded\heap_4.o: ../Middleware/FreeRTOS/Inc/projdefs.h
+nolanembedded\heap_4.o: ../Middleware/FreeRTOS/Inc/portable.h
+nolanembedded\heap_4.o: ../Middleware/FreeRTOS/Inc/deprecated_definitions.h
+nolanembedded\heap_4.o: ../Middleware/FreeRTOS/Port/portmacro.h
+nolanembedded\heap_4.o: ../Middleware/FreeRTOS/Inc/mpu_wrappers.h
+nolanembedded\heap_4.o: ../Middleware/FreeRTOS/Inc/task.h
+nolanembedded\heap_4.o: ../Middleware/FreeRTOS/Inc/list.h

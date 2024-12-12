@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "rtt.h": "c",
+        "segger_rtt.h": "c",
+        "segger_rtt_conf.h": "c",
+        "stdarg.h": "c",
+        "beep.h": "c",
+        "main.h": "c",
+        "uart.h": "c"
+    }
+}

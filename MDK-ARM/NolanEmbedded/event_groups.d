@@ -1,0 +1,15 @@
+nolanembedded\event_groups.o: ..\Middleware\FreeRTOS\Src\event_groups.c
+nolanembedded\event_groups.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+nolanembedded\event_groups.o: ../Middleware/FreeRTOS/Inc/FreeRTOS.h
+nolanembedded\event_groups.o: D:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+nolanembedded\event_groups.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+nolanembedded\event_groups.o: ../Inc/FreeRTOSConfig.h
+nolanembedded\event_groups.o: ../Middleware/FreeRTOS/Inc/projdefs.h
+nolanembedded\event_groups.o: ../Middleware/FreeRTOS/Inc/portable.h
+nolanembedded\event_groups.o: ../Middleware/FreeRTOS/Inc/deprecated_definitions.h
+nolanembedded\event_groups.o: ../Middleware/FreeRTOS/Port/portmacro.h
+nolanembedded\event_groups.o: ../Middleware/FreeRTOS/Inc/mpu_wrappers.h
+nolanembedded\event_groups.o: ../Middleware/FreeRTOS/Inc/task.h
+nolanembedded\event_groups.o: ../Middleware/FreeRTOS/Inc/list.h
+nolanembedded\event_groups.o: ../Middleware/FreeRTOS/Inc/timers.h
+nolanembedded\event_groups.o: ../Middleware/FreeRTOS/Inc/event_groups.h

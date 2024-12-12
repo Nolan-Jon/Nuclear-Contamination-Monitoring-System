@@ -1,0 +1,13 @@
+nolanembedded\croutine.o: ..\Middleware\FreeRTOS\Src\croutine.c
+nolanembedded\croutine.o: ../Middleware/FreeRTOS/Inc/FreeRTOS.h
+nolanembedded\croutine.o: D:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+nolanembedded\croutine.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+nolanembedded\croutine.o: ../Inc/FreeRTOSConfig.h
+nolanembedded\croutine.o: ../Middleware/FreeRTOS/Inc/projdefs.h
+nolanembedded\croutine.o: ../Middleware/FreeRTOS/Inc/portable.h
+nolanembedded\croutine.o: ../Middleware/FreeRTOS/Inc/deprecated_definitions.h
+nolanembedded\croutine.o: ../Middleware/FreeRTOS/Port/portmacro.h
+nolanembedded\croutine.o: ../Middleware/FreeRTOS/Inc/mpu_wrappers.h
+nolanembedded\croutine.o: ../Middleware/FreeRTOS/Inc/task.h
+nolanembedded\croutine.o: ../Middleware/FreeRTOS/Inc/list.h
+nolanembedded\croutine.o: ../Middleware/FreeRTOS/Inc/croutine.h

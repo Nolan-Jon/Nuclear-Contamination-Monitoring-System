@@ -1,0 +1,12 @@
+nolanembedded\list.o: ..\Middleware\FreeRTOS\Src\list.c
+nolanembedded\list.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+nolanembedded\list.o: ../Middleware/FreeRTOS/Inc/FreeRTOS.h
+nolanembedded\list.o: D:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+nolanembedded\list.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+nolanembedded\list.o: ../Inc/FreeRTOSConfig.h
+nolanembedded\list.o: ../Middleware/FreeRTOS/Inc/projdefs.h
+nolanembedded\list.o: ../Middleware/FreeRTOS/Inc/portable.h
+nolanembedded\list.o: ../Middleware/FreeRTOS/Inc/deprecated_definitions.h
+nolanembedded\list.o: ../Middleware/FreeRTOS/Port/portmacro.h
+nolanembedded\list.o: ../Middleware/FreeRTOS/Inc/mpu_wrappers.h
+nolanembedded\list.o: ../Middleware/FreeRTOS/Inc/list.h

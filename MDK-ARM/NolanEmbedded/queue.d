@@ -1,0 +1,15 @@
+nolanembedded\queue.o: ..\Middleware\FreeRTOS\Src\queue.c
+nolanembedded\queue.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+nolanembedded\queue.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
+nolanembedded\queue.o: ../Middleware/FreeRTOS/Inc/FreeRTOS.h
+nolanembedded\queue.o: D:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+nolanembedded\queue.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+nolanembedded\queue.o: ../Inc/FreeRTOSConfig.h
+nolanembedded\queue.o: ../Middleware/FreeRTOS/Inc/projdefs.h
+nolanembedded\queue.o: ../Middleware/FreeRTOS/Inc/portable.h
+nolanembedded\queue.o: ../Middleware/FreeRTOS/Inc/deprecated_definitions.h
+nolanembedded\queue.o: ../Middleware/FreeRTOS/Port/portmacro.h
+nolanembedded\queue.o: ../Middleware/FreeRTOS/Inc/mpu_wrappers.h
+nolanembedded\queue.o: ../Middleware/FreeRTOS/Inc/task.h
+nolanembedded\queue.o: ../Middleware/FreeRTOS/Inc/list.h
+nolanembedded\queue.o: ../Middleware/FreeRTOS/Inc/queue.h
