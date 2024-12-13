@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Middleware/FreeRTOS/Inc;../Middleware/FreeRTOS/Port;../Bsp/RTT/Inc;../Bsp/Beep/Inc;..\Bsp\Uart\Inc</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Middleware/FreeRTOS/Inc;../Middleware/FreeRTOS/Port;../Bsp/RTT/Inc;../Bsp/Beep/Inc;..\Bsp\Uart\Inc;..\Application\commucation\Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -550,6 +550,11 @@
               <FileName>stm32f4xx_hal_timebase_tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/stm32f4xx_hal_timebase_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>freertos_start.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\freertos_start.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -791,6 +796,16 @@
               <FileName>uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Bsp\Uart\Src\uart.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application/Commucation</GroupName>
+          <Files>
+            <File>
+              <FileName>commucation.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\commucation\Src\commucation.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-12 18:57:51
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-12 19:44:52
+ * @LastEditTime: 2024-12-13 15:30:00
  * @Description: beep.h
  * 
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved. 

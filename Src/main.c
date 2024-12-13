@@ -26,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 #include "rtt.h"
 #include "beep.h"
+#include "freertos_start.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -98,7 +99,7 @@ int main(void)
   HAL_Delay(1000);
   beep_stop();
   /* USER CODE END 2 */
-
+  freertos_start();
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)

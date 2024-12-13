@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-12 15:54:05
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-12 16:35:51
+ * @LastEditTime: 2024-12-13 17:00:31
  * @Description:
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -18,6 +18,7 @@
 void rtt_log_init(void)
 {
     SEGGER_RTT_Init();
+    rtt_print_log("RTT Init Successfully!\r\n");
 }
 /**
  * @description: 通过SEGGER RTT打印日志,支持格式化输出,不支持浮点数格式化
@@ -26,6 +27,9 @@ void rtt_log_init(void)
  */
 int rtt_print_log(const char *sFormat, ...)
 {
+    // /* 该函数输出的Terminal编号恒定为0 */
+    // SEGGER_RTT_SetTerminal(0);
+
     int r;
     va_list ParamList;
 

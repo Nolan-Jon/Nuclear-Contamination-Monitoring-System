@@ -30,4 +30,14 @@ nolanembedded\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_
 nolanembedded\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 nolanembedded\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 nolanembedded\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
+nolanembedded\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 nolanembedded\stm32f4xx_it.o: ../Inc/stm32f4xx_it.h
+nolanembedded\stm32f4xx_it.o: ../Middleware/FreeRTOS/Inc/FreeRTOS.h
+nolanembedded\stm32f4xx_it.o: ../Inc/FreeRTOSConfig.h
+nolanembedded\stm32f4xx_it.o: ../Middleware/FreeRTOS/Inc/projdefs.h
+nolanembedded\stm32f4xx_it.o: ../Middleware/FreeRTOS/Inc/portable.h
+nolanembedded\stm32f4xx_it.o: ../Middleware/FreeRTOS/Inc/deprecated_definitions.h
+nolanembedded\stm32f4xx_it.o: ../Middleware/FreeRTOS/Port/portmacro.h
+nolanembedded\stm32f4xx_it.o: ../Middleware/FreeRTOS/Inc/mpu_wrappers.h
+nolanembedded\stm32f4xx_it.o: ../Middleware/FreeRTOS/Inc/task.h
+nolanembedded\stm32f4xx_it.o: ../Middleware/FreeRTOS/Inc/list.h

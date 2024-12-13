@@ -6,6 +6,14 @@
         "stdarg.h": "c",
         "beep.h": "c",
         "main.h": "c",
-        "uart.h": "c"
+        "uart.h": "c",
+        "string.h": "c",
+        "portable.h": "c",
+        "task.h": "c",
+        "freertos_start.h": "c",
+        "freertosconfig.h": "c",
+        "commucation.h": "c",
+        "freertos.h": "c",
+        "usart.h": "c"
     }
 }

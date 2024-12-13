@@ -13,6 +13,7 @@
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\RTT\\Inc",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Beep\\Inc",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Uart\\Inc",
+                "d:\\Files\\Code\\Keil\\NolanEmbedded\\Application\\commucation\\Inc",
                 "D:\\Keil\\ARM\\ARMCC\\include",
                 "D:\\Keil\\ARM\\ARMCC\\include\\arm_linux",
                 "D:\\Keil\\ARM\\ARMCC\\include\\arm_linux_compat",
@@ -23,7 +24,8 @@
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Middleware\\FreeRTOS\\Src",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\RTT\\Src",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Beep\\Src",
-                "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Uart\\Src"
+                "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Uart\\Src",
+                "d:\\Files\\Code\\Keil\\NolanEmbedded\\Application\\commucation\\Src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",
