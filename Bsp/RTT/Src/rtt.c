@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-12 15:54:05
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-16 11:49:00
+ * @LastEditTime: 2024-12-16 19:38:29
  * @Description:
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -42,8 +42,8 @@ int rtt_print_log(const char *sFormat, ...)
 }
 /**
  * @description: 将浮点值格式化成字符串
- * @param {char} *str
- * @param {float} va
+ * @param {char} *str:转换后的字符串
+ * @param {float} va:浮点值
  * @return {*}
  */
 void rtt_float_to_str(char *str, float va)
@@ -57,4 +57,61 @@ void rtt_float_to_str(char *str, float va)
         sprintf(str, "-%d.%d", head, point);
     else
         sprintf(str, "%d.%d", head, point);
+}
+/**
+ * @description: 将字符串转换成对应的十六进制进行打印
+ * @param {uint8_t*} buf:字符串指针
+ * @param {int} len:打印长度
+ * @return {*}
+ */
+void rtt_str_to_hex(const uint8_t* buf, int len)
+{
+    int i, c;
+
+    while ((int)len > 0)
+    {
+        SEGGER_RTT_printf(0, "%08X: ", buf);
+
+        for (i = 0; i < 16; i++)
+        {
+            if (i < (int)len)
+            {
+                SEGGER_RTT_printf(0, "%02X ", buf[i] & 0xFF);
+            }
+            else
+            {
+                SEGGER_RTT_printf(0, "   ");
+            }
+
+            if (i == 7)
+            {
+                SEGGER_RTT_printf(0, " ");
+            }
+        }
+
+        SEGGER_RTT_printf(0, " |");
+
+        for (i = 0; i < 16; i++)
+        {
+            if (i < (int)len)
+            {
+                c = buf[i] & 0xFF;
+
+                if ((c < 0x20) || (c >= 0x7F))
+                {
+                    c = '.';
+                }
+            }
+            else
+            {
+                c = ' ';
+            }
+
+            SEGGER_RTT_printf(0, "%c", c);
+        }
+
+        SEGGER_RTT_printf(0, "|\n");
+        len -= 16;
+        buf += 16;
+    }
 }

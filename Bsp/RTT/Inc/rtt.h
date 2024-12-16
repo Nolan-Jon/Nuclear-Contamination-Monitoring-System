@@ -16,7 +16,7 @@
 void rtt_log_init(void);
 int rtt_print_log(const char *sFormat, ...);
 void rtt_float_to_str(char *str, float va);
-
+void rtt_str_to_hex(const uint8_t* buf, int len);
 /**
  * @description: 日志功能原型,供下面的LOGI,LOGW,LOGE等使用
  * @return {*}
