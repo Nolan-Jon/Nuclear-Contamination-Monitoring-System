@@ -18,7 +18,7 @@ I (../Middleware/FreeRTOS/Port/portmacro.h)(0x64020E50)
 I (../Middleware/FreeRTOS/Inc/mpu_wrappers.h)(0x64020E50)
 I (../Middleware/FreeRTOS/Inc/task.h)(0x64020E50)
 I (../Middleware/FreeRTOS/Inc/list.h)(0x64020E50)
-I (../Application/commucation/Inc/commucation.h)(0x67600A8A)
+I (../Application/commucation/Inc/commucation.h)(0x67601C53)
 I (../Bsp/Uart/Inc/uart.h)(0x675FC8E9)
 I (../Inc/usart.h)(0x675AE5D8)
 I (../Inc/main.h)(0x675AC940)
@@ -55,7 +55,7 @@ I (../Bsp/RTT/Inc/SEGGER_RTT.h)(0x675AA1B0)
 I (../Bsp/RTT/Inc/SEGGER_RTT_Conf.h)(0x6759B0DA)
 I (D:\Keil\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
 I (D:\Keil\ARM\ARMCC\include\stdarg.h)(0x5E8E3CC2)
-F (../Src/main.c)(0x67600AA5)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/FreeRTOS/Inc -I ../Middleware/FreeRTOS/Port -I ../Bsp/RTT/Inc -I ../Bsp/Beep/Inc -I ../Bsp/Uart/Inc -I ..\Bsp\Algorithm\Inc -I ../Application/commucation/Inc-I.\RTE\_NolanEmbedded-ID:\Keil\Pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="541" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o nolanembedded\main.o --omf_browse nolanembedded\main.crf --depend nolanembedded\main.d)
+F (../Src/main.c)(0x67601C8D)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/FreeRTOS/Inc -I ../Middleware/FreeRTOS/Port -I ../Bsp/RTT/Inc -I ../Bsp/Beep/Inc -I ../Bsp/Uart/Inc -I ..\Bsp\Algorithm\Inc -I ../Application/commucation/Inc-I.\RTE\_NolanEmbedded-ID:\Keil\Pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="541" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o nolanembedded\main.o --omf_browse nolanembedded\main.crf --depend nolanembedded\main.d)
 I (../Inc/main.h)(0x675AC940)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x675A87EC)
 I (../Inc/stm32f4xx_hal_conf.h)(0x675AE5D9)
@@ -96,7 +96,7 @@ I (../Bsp/RTT/Inc/SEGGER_RTT_Conf.h)(0x6759B0DA)
 I (D:\Keil\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
 I (D:\Keil\ARM\ARMCC\include\stdarg.h)(0x5E8E3CC2)
 I (../Bsp/Beep/Inc/beep.h)(0x675BE278)
-I (../Application/commucation/Inc/commucation.h)(0x67600A8A)
+I (../Application/commucation/Inc/commucation.h)(0x67601C53)
 I (../Inc/FreeRTOSConfig.h)(0x675BF951)
 I (../Bsp/Uart/Inc/uart.h)(0x675FC8E9)
 I (../Inc/freertos_start.h)(0x675BFAB0)
@@ -1076,8 +1076,8 @@ F (..\Bsp\Algorithm\Src\crc16.c)(0x675FEBC4)(--c99 -c --cpu Cortex-M4.fp.sp -g -
 I (..\Bsp\Algorithm\Inc\crc16.h)(0x675FEB9D)
 I (D:\Keil\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Keil\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
-F (..\Application\commucation\Src\commucation.c)(0x67600F45)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/FreeRTOS/Inc -I ../Middleware/FreeRTOS/Port -I ../Bsp/RTT/Inc -I ../Bsp/Beep/Inc -I ../Bsp/Uart/Inc -I ..\Bsp\Algorithm\Inc -I ../Application/commucation/Inc-I.\RTE\_NolanEmbedded-ID:\Keil\Pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="541" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o nolanembedded\commucation.o --omf_browse nolanembedded\commucation.crf --depend nolanembedded\commucation.d)
-I (../Application/commucation/Inc/commucation.h)(0x67600A8A)
+F (..\Application\commucation\Src\commucation.c)(0x67601C0B)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/FreeRTOS/Inc -I ../Middleware/FreeRTOS/Port -I ../Bsp/RTT/Inc -I ../Bsp/Beep/Inc -I ../Bsp/Uart/Inc -I ..\Bsp\Algorithm\Inc -I ../Application/commucation/Inc-I.\RTE\_NolanEmbedded-ID:\Keil\Pack\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="541" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o nolanembedded\commucation.o --omf_browse nolanembedded\commucation.crf --depend nolanembedded\commucation.d)
+I (../Application/commucation/Inc/commucation.h)(0x67601C53)
 I (../Inc/FreeRTOSConfig.h)(0x675BF951)
 I (D:\Keil\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (../Bsp/Uart/Inc/uart.h)(0x675FC8E9)

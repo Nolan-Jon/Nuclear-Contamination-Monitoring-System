@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-13 14:38:45
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-16 19:30:13
+ * @LastEditTime: 2024-12-16 20:21:41
  * @Description: commucation.c 上位机通信文件
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -105,6 +105,9 @@ uint8_t protocol_head_check(Commucation_ProtocolHandle message, uint8_t *rx_buff
  */
 static void commucation_message_decode(uint8_t *rx_buffer, uint16_t frame_length)
 {
+#ifdef  __EASY_PRINT_TEST
+    rtt_str_to_hex(rx_buffer, frame_length);
+#else
     /* 申请在静态区,只创建一次,避免反复申请 */
     static uint16_t frame_length_except_tail; /* 除帧尾校验外的数据长度 */
     static uint16_t frame_error_count = 0;    /* 错误帧计数 */
@@ -112,6 +115,7 @@ static void commucation_message_decode(uint8_t *rx_buffer, uint16_t frame_length
     if (protocol_head_check(message_handle, rx_buffer))
     {
         /* 通过帧头校验 */
+        LOGWARNING("W:Pass Protocol Head Check.\r\n");
         frame_length_except_tail = OFFSET_BYTE + message_handle->data_length;
         if (crc16_check(rx_buffer, frame_length_except_tail))
         {
@@ -119,10 +123,20 @@ static void commucation_message_decode(uint8_t *rx_buffer, uint16_t frame_length
             /* 获取16位寄存器的值 */
             message_handle->flags_register = (rx_buffer[7] << 8) | rx_buffer[6];
             memcpy(message_handle->float_data, rx_buffer + 8, message_handle->data_length - 2);
-
-            /* 测试部分 */
-            LOGINFO("COMMUCATION:cmd id is:[%x]---data:[%s]\r\n", message_handle->cmd_id, message_handle->float_data);
-            /* 测试数据,来源下面的测试数据生成函数 */
+#ifdef __COMMUCATION_PROTOCOL_TEST_DATA
+            /* cmd_id解码测试 */
+            // 正确编码:00 10
+            uint8_t cmd_id_high = message_handle->cmd_id >> 8;
+            uint8_t cmd_id_low = message_handle->cmd_id;
+            rtt_str_to_hex(&cmd_id_high, 1);
+            rtt_str_to_hex(&cmd_id_low, 1);
+            /* float数据解码测试 */
+            // 正确编码:EB 56 B7 3F AE 6E 67 43 A4 70 15 41 2A E9 F6 42 75
+            rtt_str_to_hex(message_handle->float_data, message_handle->data_length - 2);
+            /* 测试数据由函数generate_test_data生成 */
+            // A5 12 00 74 10 00 55 FE EB 56 B7 3F AE 6E 67 43 A4 70 15 41 2A E9 F6 42 75 71
+            // 浮点数据:1.43234/231.43234/9.34/123.4554
+#endif //__COMMUCATION_PROTOCOL_TEST_DATA
         }
     }
     else
@@ -130,6 +144,7 @@ static void commucation_message_decode(uint8_t *rx_buffer, uint16_t frame_length
         frame_error_count++;
         LOGWARNING("W:Receive Error Frame, accumulate [%d] times.\r\n", frame_error_count);
     }
+#endif  //__EASY_PRINT_TEST
 }
 #ifdef __COMMUCATION_PROTOCOL_TEST_DATA
 /**

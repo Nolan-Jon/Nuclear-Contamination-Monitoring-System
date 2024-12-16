@@ -99,9 +99,11 @@ int main(void)
   beep_start();
   HAL_Delay(1000);
   beep_stop();
+#ifndef __EASY_PRINT_TEST
 #ifdef __COMMUCATION_PROTOCOL_TEST_DATA
   generate_test_data(0x0010, 0xFE55);
 #endif //__COMMUCATION_PROTOCOL_TEST_DATA
+#endif  //__EASY_PRINT_TEST
   /* 开启FreeRTOS */
   freertos_start();
   /* USER CODE END 2 */
