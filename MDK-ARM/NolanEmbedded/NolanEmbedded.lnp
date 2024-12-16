@@ -39,6 +39,8 @@
 "nolanembedded\segger_rtt_printf.o"
 "nolanembedded\beep.o"
 "nolanembedded\uart.o"
+"nolanembedded\crc8.o"
+"nolanembedded\crc16.o"
 "nolanembedded\commucation.o"
 --strict --scatter "NolanEmbedded\NolanEmbedded.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols

@@ -40,8 +40,10 @@ nolanembedded\main.o: ../Bsp/RTT/Inc/SEGGER_RTT_Conf.h
 nolanembedded\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 nolanembedded\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdarg.h
 nolanembedded\main.o: ../Bsp/Beep/Inc/beep.h
-nolanembedded\main.o: ../Inc/freertos_start.h
+nolanembedded\main.o: ../Application/commucation/Inc/commucation.h
 nolanembedded\main.o: ../Inc/FreeRTOSConfig.h
+nolanembedded\main.o: ../Bsp/Uart/Inc/uart.h
+nolanembedded\main.o: ../Inc/freertos_start.h
 nolanembedded\main.o: ../Middleware/FreeRTOS/Inc/FreeRTOS.h
 nolanembedded\main.o: ../Middleware/FreeRTOS/Inc/projdefs.h
 nolanembedded\main.o: ../Middleware/FreeRTOS/Inc/portable.h

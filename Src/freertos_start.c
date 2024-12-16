@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-13 13:38:48
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-16 11:47:19
+ * @LastEditTime: 2024-12-16 19:13:27
  * @Description: freertos_start.c
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -35,7 +35,6 @@ void freertos_start(void)
     BaseType_t res = 0;
     /* 创建启动任务 */
     LOGINFO("start freertos\r\n");
-    LOGINFO("aaaaaaaaaaaaaa\r\n");
     res = xTaskCreate(start_task, "start_task", START_TASK_STACK, NULL, START_TASK_PRIORITY, &start_task_handle);
     if (res == pdPASS)
     {
