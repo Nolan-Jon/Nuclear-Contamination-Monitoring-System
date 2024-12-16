@@ -13,6 +13,7 @@
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\RTT\\Inc",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Beep\\Inc",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Uart\\Inc",
+                "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Algorithm\\Inc",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Application\\commucation\\Inc",
                 "D:\\Keil\\ARM\\ARMCC\\include",
                 "D:\\Keil\\ARM\\ARMCC\\include\\arm_linux",
@@ -25,6 +26,7 @@
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\RTT\\Src",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Beep\\Src",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Uart\\Src",
+                "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Algorithm\\Src",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Application\\commucation\\Src"
             ],
             "defines": [

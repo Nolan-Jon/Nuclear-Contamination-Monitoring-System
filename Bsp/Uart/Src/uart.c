@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-12 21:33:51
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-13 17:15:44
+ * @LastEditTime: 2024-12-16 14:04:48
  * @Description: uart.c
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -22,6 +22,7 @@ static UART_InstanceHandle uart_instance_array[DEVICE_UART_NUM] = {NULL}; /* 挂
 static void uart_service_start(UART_InstanceHandle uart_instance_handle)
 {
 
+    /* 注意,虽然使用DMA进行数据传输,但是串口空闲中断依赖UART全局中断,注意开启UART全局中断*/
     HAL_UARTEx_ReceiveToIdle_DMA(uart_instance_handle->uartHandle, uart_instance_handle->recv_buffer, uart_instance_handle->recv_buffer_size);
     /* 该函数会调用UART_Start_Receive_DMA开启串口的DMA接收,该函数会配置三种回调函数,同时开启DMA中断 */
     /* DMA传输完成回调函数、DMA半传输完成回调函数、DMA传输错误回调函数 */
@@ -34,7 +35,7 @@ static void uart_service_start(UART_InstanceHandle uart_instance_handle)
 /**
  * @description: 发生DMA传输完成中断和IDLE中断后,会调用该回调函数,注意每个串口设备都会调用该函数,因此内部要做区分
  * @param {UART_HandleTypeDef} *huart
- * @param {uint16_t} Size 本次接收到的数据包数量
+ * @param {uint16_t} Size 本次接收到的数据包数量:接收到的一帧数据的大小
  * @return {*}
  */
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
@@ -43,7 +44,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
     uint8_t idx = 0;
     for (; idx < DEVICE_UART_NUM; idx++)
     {
-        /* 找到发生中断的串口实例 */
+        /* 找到发生中断的串口对应的串口实例 */
         if (huart == uart_instance_array[idx]->uartHandle)
         {
             break;
@@ -90,7 +91,7 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
  * @return {*}
  */
 UART_InstanceHandle Y_uart_create_instance(uint8_t instance_num,                       /* 串口实例编号,支持0 ~ 1 */
-                                           uint8_t recv_buffer_size,                   /* 串口接受一包数据大小 */
+                                           uint16_t recv_buffer_size,                  /* 串口接受一包数据大小 */
                                            UART_HandleTypeDef *uartHandle,             /* 串口实例对应的设备句柄 */
                                            uart_recv_decode uart_recv_decode_callback) /* 解析回调函数 */
 {

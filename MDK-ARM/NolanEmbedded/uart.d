@@ -15,7 +15,7 @@ nolanembedded\uart.o: ../Bsp/RTT/Inc/SEGGER_RTT.h
 nolanembedded\uart.o: ../Bsp/RTT/Inc/SEGGER_RTT_Conf.h
 nolanembedded\uart.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 nolanembedded\uart.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdarg.h
-nolanembedded\uart.o: ..\Bsp\Uart\Inc\uart.h
+nolanembedded\uart.o: ../Bsp/Uart/Inc/uart.h
 nolanembedded\uart.o: ../Inc/usart.h
 nolanembedded\uart.o: ../Inc/main.h
 nolanembedded\uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h

@@ -1,5 +1,6 @@
 --cpu=Cortex-M4.fp.sp
 "nolanembedded\startup_stm32f407xx.o"
+"nolanembedded\freertos_start.o"
 "nolanembedded\main.o"
 "nolanembedded\gpio.o"
 "nolanembedded\dma.o"
@@ -7,7 +8,6 @@
 "nolanembedded\stm32f4xx_it.o"
 "nolanembedded\stm32f4xx_hal_msp.o"
 "nolanembedded\stm32f4xx_hal_timebase_tim.o"
-"nolanembedded\freertos_start.o"
 "nolanembedded\stm32f4xx_hal_tim.o"
 "nolanembedded\stm32f4xx_hal_tim_ex.o"
 "nolanembedded\stm32f4xx_hal_uart.o"

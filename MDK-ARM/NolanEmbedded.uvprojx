@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Middleware/FreeRTOS/Inc;../Middleware/FreeRTOS/Port;../Bsp/RTT/Inc;../Bsp/Beep/Inc;..\Bsp\Uart\Inc;..\Application\commucation\Inc</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Middleware/FreeRTOS/Inc;../Middleware/FreeRTOS/Port;../Bsp/RTT/Inc;../Bsp/Beep/Inc;../Bsp/Uart/Inc;..\Bsp\Algorithm\Inc;../Application/commucation/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -413,6 +413,11 @@
               <FileName>stm32f4xx_it.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Inc\stm32f4xx_it.h</FilePath>
+            </File>
+            <File>
+              <FileName>freertos_start.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\freertos_start.c</FilePath>
             </File>
             <File>
               <FileName>main.c</FileName>
@@ -550,11 +555,6 @@
               <FileName>stm32f4xx_hal_timebase_tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/stm32f4xx_hal_timebase_tim.c</FilePath>
-            </File>
-            <File>
-              <FileName>freertos_start.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\freertos_start.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -796,6 +796,21 @@
               <FileName>uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Bsp\Uart\Src\uart.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP/Src/Algorithm</GroupName>
+          <Files>
+            <File>
+              <FileName>crc8.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Bsp\Algorithm\Src\crc8.c</FilePath>
+            </File>
+            <File>
+              <FileName>crc16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Bsp\Algorithm\Src\crc16.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -98,8 +98,11 @@ int main(void)
   beep_start();
   HAL_Delay(1000);
   beep_stop();
-  /* USER CODE END 2 */
+
+  /* 开启FreeRTOS */
   freertos_start();
+  /* USER CODE END 2 */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)

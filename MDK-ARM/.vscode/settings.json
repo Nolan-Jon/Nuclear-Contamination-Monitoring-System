@@ -14,6 +14,9 @@
         "freertosconfig.h": "c",
         "commucation.h": "c",
         "freertos.h": "c",
-        "usart.h": "c"
+        "usart.h": "c",
+        "crc8.h": "c",
+        "stdint.h": "c",
+        "crc16.h": "c"
     }
 }
