@@ -2,13 +2,12 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-16 14:39:44
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-16 14:57:17
+ * @LastEditTime: 2024-12-16 16:58:44
  * @Description: crc16.c
  * 
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved. 
  */
 #include "crc16.h"
-#include "stdint.h"
 #include "stdlib.h"
 
 static uint8_t crc_tab16_init = 0;

@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-16 14:39:35
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-16 14:52:15
+ * @LastEditTime: 2024-12-16 16:58:37
  * @Description: crc8.c
  * 
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved. 
@@ -10,7 +10,6 @@
 
 
 #include "crc8.h"
-#include "stdint.h"
 #include "stdlib.h"
 /*
  * static uint8_t sht75_crc_table[];

@@ -2,14 +2,14 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-16 14:40:03
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-16 14:53:22
+ * @LastEditTime: 2024-12-16 16:58:05
  * @Description: crc16.h
  * 
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved. 
  */
 #ifndef __CRC16__H__
 #define __CRC16__H__
-
+#include "stdint.h"
 #define CRC_START_16 0xFFFF
 #define CRC_START_MODBUS 0xFFFF
 #define CRC_POLY_16 0xA001
