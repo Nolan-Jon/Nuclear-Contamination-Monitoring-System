@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-13 13:38:48
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-13 16:59:14
+ * @LastEditTime: 2024-12-16 11:47:19
  * @Description: freertos_start.c
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -15,7 +15,6 @@ extern TaskHandle_t commucation_task_handle;
 void start_task(void *pvParameters)
 {
     /* 启动任务运行的时候调度器已经启动,由于需要创建其他任务,为了避免错误,需要设置临界区 */
-    SEGGER_RTT_SetTerminal(1);
     LOGINFO("Enter start task\r\n");
     /* 进入临界区 */
     taskENTER_CRITICAL();

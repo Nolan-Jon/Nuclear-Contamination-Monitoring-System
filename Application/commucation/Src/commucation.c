@@ -2,11 +2,12 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-13 14:38:45
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-13 17:20:30
+ * @LastEditTime: 2024-12-13 17:27:58
  * @Description: commucation.c 上位机通信文件
  * 
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved. 
  */
+
 #include "commucation.h"
 #include "FreeRTOS.h"
 #include "task.h"
@@ -16,7 +17,7 @@
 TaskHandle_t commucation_task_handle;
 UART_InstanceHandle commucation_uart_handle;
 /**
- * @description: 
+ * @description: 解码函数
  * @param {uint8_t} *buffer
  * @param {uint16_t} pack_num
  * @return {*}

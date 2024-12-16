@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-12 15:54:05
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-13 17:00:31
+ * @LastEditTime: 2024-12-16 11:49:00
  * @Description:
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -18,6 +18,8 @@
 void rtt_log_init(void)
 {
     SEGGER_RTT_Init();
+    /* 设置输出的Terminal编号恒定为0 */
+    SEGGER_RTT_SetTerminal(0);
     rtt_print_log("RTT Init Successfully!\r\n");
 }
 /**
