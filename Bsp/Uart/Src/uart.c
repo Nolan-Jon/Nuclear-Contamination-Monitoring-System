@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-12 21:33:51
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-16 14:04:48
+ * @LastEditTime: 2024-12-17 20:17:17
  * @Description: uart.c
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -104,7 +104,7 @@ UART_InstanceHandle Y_uart_create_instance(uint8_t instance_num,                
         }
     }
     /* 检测是否已经注册过 */
-    if (uart_instance_array[instance_num] == NULL)
+    if (uart_instance_array[instance_num] != NULL)
     {
         while (1)
         {

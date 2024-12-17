@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-12 21:34:06
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-16 13:38:30
+ * @LastEditTime: 2024-12-17 20:24:00
  * @Description: uart.h
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -13,7 +13,7 @@
 #include "usart.h"
 /* 创建串口实例结构体,把每个串口都当成一个实例对象,即一个串口设备对应一个串口对象 */
 /* 串口是独占的点对点通信,不存在多个设备同时占用一个串口的情况 */
-#define DEVICE_UART_NUM 2 - 1        /* 开发板上只有两个可用串口,从0开始算 */
+#define DEVICE_UART_NUM 2            /* 开发板上只有两个可用串口,从0开始算 */
 #define UART_RECEIVE_BUFFER_SIZE 256 /* 接受缓冲区的大小*/
 #define IDX_OF_UART_DEVICE_1 0       /* 串口0对应的编号*/
 #define IDX_OF_UART_DEVICE_3 1       /* 串口3对应的编号*/
