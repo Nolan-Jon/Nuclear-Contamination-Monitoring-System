@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-13 14:38:32
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-16 20:25:43
+ * @LastEditTime: 2024-12-17 10:36:51
  * @Description: commucation.h
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -55,8 +55,9 @@
 #define TRUE 0x01
 #define FALSE 0x00
 /* 生成测试数据 */
-#define __EASY_PRINT_TEST
-#define __COMMUCATION_PROTOCOL_TEST_DATA
+/* 两个测试宏定义 */
+//#define __EASY_PRINT_TEST
+//#define __COMMUCATION_PROTOCOL_TEST_DATA
 #ifndef __EASY_PRINT_TEST
 #ifdef __COMMUCATION_PROTOCOL_TEST_DATA
 void generate_test_data(uint16_t cmd_id,          /* 命令码 */

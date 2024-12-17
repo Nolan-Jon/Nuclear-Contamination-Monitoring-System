@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-13 14:38:45
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-16 20:21:41
+ * @LastEditTime: 2024-12-17 10:36:17
  * @Description: commucation.c 上位机通信文件
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -38,11 +38,12 @@ uint8_t get_crc8_check_code(uint8_t *message, uint16_t size)
 uint8_t crc8_check(uint8_t *message, uint16_t size)
 {
     uint8_t ucExpected = 0; /* 期望值 */
+    /* 问题:为什么需要<=2,,不能计算一个字节数据的crc吗? */
     if ((message == NULL) || (size <= 2))
     {
         return FALSE; /* false */
     }
-    ucExpected = crc_8(message, size);
+    ucExpected = crc_8(message, size - 1);
     return (ucExpected == message[size - 1]); /* true or false */
 }
 /**
@@ -63,12 +64,14 @@ uint8_t get_crc16_check_code(uint8_t *message, uint32_t size)
  */
 uint8_t crc16_check(uint8_t *message, uint32_t size)
 {
-    uint8_t ucExpected = 0; /* 期望值 */
+    /* 注意,期望值是16字节 */
+    uint16_t ucExpected = 0; /* 期望值 */
     if ((message == NULL) || (size <= 2))
     {
         return FALSE; /* false */
     }
-    ucExpected = crc_16(message, size);
+    /* 计算除了帧尾字节外的其他字节的crc16 */
+    ucExpected = crc_16(message, size - 2);
     return (((ucExpected & 0xff) == message[size - 2]) && (((ucExpected >> 8) & 0xff) == message[size - 1])); /* true or false */
 }
 /**
@@ -83,11 +86,17 @@ uint8_t protocol_head_check(Commucation_ProtocolHandle message, uint8_t *rx_buff
     /* 如果检验通过,将rx_buffer的数据装载到message句柄对应的结构体 */
     if (rx_buffer[0] == PROTOCOL_HEAD_CMD)
     {
+#if !defined __EASY_PRINT_TEST && defined __COMMUCATION_PROTOCOL_TEST_DATA
+        LOGWARNING("TEST Pass Protocol Head CMD.\r\n");
+#endif //!__EASY_PRINT_TEST && __COMMUCATION_PROTOCOL_TEST_DATA
         message->sof = PROTOCOL_HEAD_CMD;
         /* 检验帧头crc8 */
         /* 帧头4字节 */
         if (crc8_check(rx_buffer, 4))
         {
+#if !defined __EASY_PRINT_TEST && defined __COMMUCATION_PROTOCOL_TEST_DATA
+            LOGWARNING("TEST Pass crc8 Check.\r\n");
+#endif //!__EASY_PRINT_TEST && __COMMUCATION_PROTOCOL_TEST_DATA
             message->data_length = (rx_buffer[2] << 8) | rx_buffer[1]; /* 先发低字节,后发高字节 */
             message->crc_check = rx_buffer[3];
             message->cmd_id = (rx_buffer[5] << 8) | rx_buffer[4]; /* 先发低字节,后发高字节 */
@@ -105,20 +114,21 @@ uint8_t protocol_head_check(Commucation_ProtocolHandle message, uint8_t *rx_buff
  */
 static void commucation_message_decode(uint8_t *rx_buffer, uint16_t frame_length)
 {
-#ifdef  __EASY_PRINT_TEST
+#ifdef __EASY_PRINT_TEST
     rtt_str_to_hex(rx_buffer, frame_length);
 #else
     /* 申请在静态区,只创建一次,避免反复申请 */
-    static uint16_t frame_length_except_tail; /* 除帧尾校验外的数据长度 */
     static uint16_t frame_error_count = 0;    /* 错误帧计数 */
 
     if (protocol_head_check(message_handle, rx_buffer))
     {
         /* 通过帧头校验 */
-        LOGWARNING("W:Pass Protocol Head Check.\r\n");
-        frame_length_except_tail = OFFSET_BYTE + message_handle->data_length;
-        if (crc16_check(rx_buffer, frame_length_except_tail))
+        if (crc16_check(rx_buffer, frame_length))
         {
+            /* 通过crc16校验 */
+#if !defined __EASY_PRINT_TEST && defined __COMMUCATION_PROTOCOL_TEST_DATA
+            LOGWARNING("Pass crc16 Check.\r\n");
+#endif //!__EASY_PRINT_TEST && __COMMUCATION_PROTOCOL_TEST_DATA
             /* 整帧数据通过crc16检验 */
             /* 获取16位寄存器的值 */
             message_handle->flags_register = (rx_buffer[7] << 8) | rx_buffer[6];
@@ -131,21 +141,28 @@ static void commucation_message_decode(uint8_t *rx_buffer, uint16_t frame_length
             rtt_str_to_hex(&cmd_id_high, 1);
             rtt_str_to_hex(&cmd_id_low, 1);
             /* float数据解码测试 */
-            // 正确编码:EB 56 B7 3F AE 6E 67 43 A4 70 15 41 2A E9 F6 42 75
+            // 正确编码:EB 56 B7 3F AE 6E 67 43 A4 70 15 41 2A E9 F6 42
             rtt_str_to_hex(message_handle->float_data, message_handle->data_length - 2);
             /* 测试数据由函数generate_test_data生成 */
             // A5 12 00 74 10 00 55 FE EB 56 B7 3F AE 6E 67 43 A4 70 15 41 2A E9 F6 42 75 71
             // 浮点数据:1.43234/231.43234/9.34/123.4554
 #endif //__COMMUCATION_PROTOCOL_TEST_DATA
         }
+#if !defined __EASY_PRINT_TEST && defined __COMMUCATION_PROTOCOL_TEST_DATA
+        else
+        {
+            LOGWARNING("Can not Pass crc16 Check.\r\n");
+        }
+#endif //!__EASY_PRINT_TEST && __COMMUCATION_PROTOCOL_TEST_DATA
     }
     else
     {
         frame_error_count++;
-        LOGWARNING("W:Receive Error Frame, accumulate [%d] times.\r\n", frame_error_count);
+        LOGWARNING("Receive Error Frame, accumulate [%d] times.\r\n", frame_error_count);
     }
-#endif  //__EASY_PRINT_TEST
+#endif //__EASY_PRINT_TEST
 }
+#ifndef __EASY_PRINT_TEST
 #ifdef __COMMUCATION_PROTOCOL_TEST_DATA
 /**
  * @description: 通过LOG的形式生成测试数据帧,该函数不允许在RTOS中调用
@@ -207,6 +224,7 @@ void generate_test_data(uint16_t cmd_id,         /* 命令码 */
     }
 }
 #endif //__COMMUCATION_PROTOCOL_TEST_DATA
+#endif //!__EASY_PRINT_TEST
 /**
  * @description: 将数据打包成一帧,随后通过待选串口进行发送
  * @return {*}

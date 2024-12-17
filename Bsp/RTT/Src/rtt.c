@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-12 15:54:05
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-16 19:38:29
+ * @LastEditTime: 2024-12-17 09:57:54
  * @Description:
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -59,7 +59,7 @@ void rtt_float_to_str(char *str, float va)
         sprintf(str, "%d.%d", head, point);
 }
 /**
- * @description: 将字符串转换成对应的十六进制进行打印
+ * @description: 将字符串转换成对应的十六进制进行打印:一行16字节数据
  * @param {uint8_t*} buf:字符串指针
  * @param {int} len:打印长度
  * @return {*}
@@ -83,10 +83,10 @@ void rtt_str_to_hex(const uint8_t* buf, int len)
                 SEGGER_RTT_printf(0, "   ");
             }
 
-            if (i == 7)
-            {
-                SEGGER_RTT_printf(0, " ");
-            }
+            // if (i == 7)
+            // {
+            //     SEGGER_RTT_printf(0, " ");
+            // }
         }
 
         SEGGER_RTT_printf(0, " |");
