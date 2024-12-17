@@ -59,6 +59,12 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define BEEP_Pin GPIO_PIN_11
 #define BEEP_GPIO_Port GPIOD
+#define RGB_R_Pin GPIO_PIN_13
+#define RGB_R_GPIO_Port GPIOD
+#define RGB_G_Pin GPIO_PIN_14
+#define RGB_G_GPIO_Port GPIOD
+#define RGB_B_Pin GPIO_PIN_15
+#define RGB_B_GPIO_Port GPIOD
 
 /* USER CODE BEGIN Private defines */
 

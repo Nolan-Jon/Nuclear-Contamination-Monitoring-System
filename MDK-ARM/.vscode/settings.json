@@ -17,6 +17,13 @@
         "usart.h": "c",
         "crc8.h": "c",
         "stdint.h": "c",
-        "crc16.h": "c"
+        "crc16.h": "c",
+        "dwt.h": "c",
+        "stm32f4xx_hal.h": "c",
+        "stm32f4xx_hal_conf.h": "c",
+        "led.h": "c",
+        "gpio.h": "c",
+        "tim.h": "c",
+        "stdlib.h": "c"
     }
 }

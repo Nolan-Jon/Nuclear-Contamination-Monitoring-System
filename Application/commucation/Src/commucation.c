@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-13 14:38:45
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-17 10:36:17
+ * @LastEditTime: 2024-12-17 22:09:23
  * @Description: commucation.c 上位机通信文件
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -16,9 +16,15 @@
 #include "crc8.h"
 #include "crc16.h"
 #include "string.h"
+#ifdef TEST_LED_RGB
+#include "led.h"
+#endif // TEST_LED_RGB
 TaskHandle_t commucation_task_handle;
 UART_InstanceHandle commucation_uart_handle;
 Commucation_ProtocolHandle message_handle; /* 用于装载通信协议解码后的数据,只创建一次 */
+#ifdef TEST_LED_RGB
+LED_InstanceHandle commucation_led_instance_handle;
+#endif // TEST_LED_RGB
 /**
  * @description: 获取crc8校验码
  * @param {uint8_t} *message:输入字符串
@@ -96,7 +102,7 @@ uint8_t protocol_head_check(Commucation_ProtocolHandle message, uint8_t *rx_buff
         {
 #if !defined __EASY_PRINT_TEST && defined __COMMUCATION_PROTOCOL_TEST_DATA
             LOGWARNING("TEST Pass crc8 Check.\r\n");
-#endif //!__EASY_PRINT_TEST && __COMMUCATION_PROTOCOL_TEST_DATA
+#endif                                                                 //!__EASY_PRINT_TEST && __COMMUCATION_PROTOCOL_TEST_DATA
             message->data_length = (rx_buffer[2] << 8) | rx_buffer[1]; /* 先发低字节,后发高字节 */
             message->crc_check = rx_buffer[3];
             message->cmd_id = (rx_buffer[5] << 8) | rx_buffer[4]; /* 先发低字节,后发高字节 */
@@ -118,7 +124,7 @@ static void commucation_message_decode(uint8_t *rx_buffer, uint16_t frame_length
     rtt_str_to_hex(rx_buffer, frame_length);
 #else
     /* 申请在静态区,只创建一次,避免反复申请 */
-    static uint16_t frame_error_count = 0;    /* 错误帧计数 */
+    static uint16_t frame_error_count = 0; /* 错误帧计数 */
 
     if (protocol_head_check(message_handle, rx_buffer))
     {
@@ -252,6 +258,12 @@ void commucation_task(void *pvParameters)
     /* 创建串口实例,负责接受上位机的消息 */
     /* 串口实例本质上靠DMA中断处理,因此不属于任务体系,可以考虑作为硬件系统任务处理 */
     commucation_uart_handle = Y_uart_create_instance(IDX_OF_UART_DEVICE_3, COMMUCATION_PROTOCOL_FRAME_SIZE, &huart3, commucation_message_decode);
+#ifdef TEST_LED_RGB
+    /* LED测试 */
+    commucation_led_instance_handle = Y_led_creat_instance(0, Turquoise1);
+    /* 注意更改参数 */
+    led_start(commucation_led_instance_handle, 0, 0, 0);
+#endif // TEST_LED_RGB
     uint32_t heart_count = 0;
     TickType_t xLastWakeTime = 0;
     /* 创建1ms的tick计数值 */

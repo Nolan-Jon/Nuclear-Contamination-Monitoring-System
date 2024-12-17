@@ -32,6 +32,7 @@ nolanembedded\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 nolanembedded\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 nolanembedded\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 nolanembedded\main.o: ../Inc/dma.h
+nolanembedded\main.o: ../Inc/tim.h
 nolanembedded\main.o: ../Inc/usart.h
 nolanembedded\main.o: ../Inc/gpio.h
 nolanembedded\main.o: ../Bsp/RTT/Inc/rtt.h
@@ -40,6 +41,7 @@ nolanembedded\main.o: ../Bsp/RTT/Inc/SEGGER_RTT_Conf.h
 nolanembedded\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 nolanembedded\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdarg.h
 nolanembedded\main.o: ../Bsp/Beep/Inc/beep.h
+nolanembedded\main.o: ../Bsp/Led/Inc/led.h
 nolanembedded\main.o: ../Application/commucation/Inc/commucation.h
 nolanembedded\main.o: ../Inc/FreeRTOSConfig.h
 nolanembedded\main.o: ../Bsp/Uart/Inc/uart.h

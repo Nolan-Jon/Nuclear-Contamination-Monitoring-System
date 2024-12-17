@@ -48,6 +48,9 @@ nolanembedded\commucation.o: ../Bsp/RTT/Inc/SEGGER_RTT.h
 nolanembedded\commucation.o: ../Bsp/RTT/Inc/SEGGER_RTT_Conf.h
 nolanembedded\commucation.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 nolanembedded\commucation.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdarg.h
-nolanembedded\commucation.o: ..\Bsp\Algorithm\Inc\crc8.h
-nolanembedded\commucation.o: ..\Bsp\Algorithm\Inc\crc16.h
+nolanembedded\commucation.o: ../Bsp/Algorithm/Inc/crc8.h
+nolanembedded\commucation.o: ../Bsp/Algorithm/Inc/crc16.h
 nolanembedded\commucation.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
+nolanembedded\commucation.o: ../Bsp/Led/Inc/led.h
+nolanembedded\commucation.o: ../Inc/gpio.h
+nolanembedded\commucation.o: ../Inc/tim.h

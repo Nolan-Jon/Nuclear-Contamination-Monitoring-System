@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-13 14:38:32
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-17 10:36:51
+ * @LastEditTime: 2024-12-17 22:11:59
  * @Description: commucation.h
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -51,19 +51,19 @@
 #define OFFSET_BYTE 0x08                 /* 串口通信协议中,除了数据段外,其他部分所占字节数 */
 #define PROTOCOL_FRAME_LENGTH_MAX (256u) /* 数据帧最大字节数 */
 #define PROTOCOL_DATA_LENGTH_MAX (128u)  /* 数据最大字节数 */
-/* 用于检验的宏定义 */
+/* 用于通信检验的宏定义 */
 #define TRUE 0x01
 #define FALSE 0x00
 /* 生成测试数据 */
 /* 两个测试宏定义 */
-//#define __EASY_PRINT_TEST
-//#define __COMMUCATION_PROTOCOL_TEST_DATA
+// #define __EASY_PRINT_TEST
+// #define __COMMUCATION_PROTOCOL_TEST_DATA
 #ifndef __EASY_PRINT_TEST
 #ifdef __COMMUCATION_PROTOCOL_TEST_DATA
 void generate_test_data(uint16_t cmd_id,          /* 命令码 */
                         uint16_t flags_register); /* 16位寄存器 */
 #endif
-#endif  //!__EASY_PRINT_TEST
+#endif //!__EASY_PRINT_TEST
 /* 串口通信协议结构体 */
 #if defined(__CC_ARM)
 #pragma anon_unions /*支持匿名结构体和联合体 */
@@ -71,22 +71,22 @@ void generate_test_data(uint16_t cmd_id,          /* 命令码 */
 
 typedef struct
 {
-    /* data */
-    struct Frame_Head
-    {
-        /* data */
-        uint8_t sof;          /* 0xA5 */
-        uint16_t data_length; /* 数据段长度 */
-        uint8_t crc_check;    /* 帧头CRC校验 */
-    }; /* 帧头 */
-    uint16_t cmd_id; /* 功能码 */
-    struct Fream_Data
-    {
-        /* data */
-        uint16_t flags_register;                      /* 16位标志位寄存器 */
-        uint8_t float_data[PROTOCOL_DATA_LENGTH_MAX]; /* 数据 */
-    }; /* 数据帧 */
-    uint16_t frame_tail; /* 帧尾CRC校验 */
+   /* data */
+   struct Frame_Head
+   {
+      /* data */
+      uint8_t sof;          /* 0xA5 */
+      uint16_t data_length; /* 数据段长度 */
+      uint8_t crc_check;    /* 帧头CRC校验 */
+   }; /* 帧头 */
+   uint16_t cmd_id; /* 功能码 */
+   struct Fream_Data
+   {
+      /* data */
+      uint16_t flags_register;                      /* 16位标志位寄存器 */
+      uint8_t float_data[PROTOCOL_DATA_LENGTH_MAX]; /* 数据 */
+   }; /* 数据帧 */
+   uint16_t frame_tail; /* 帧尾CRC校验 */
 } Commucation_ProtocolDef;
 typedef Commucation_ProtocolDef *Commucation_ProtocolHandle;
 
@@ -94,4 +94,7 @@ typedef Commucation_ProtocolDef *Commucation_ProtocolHandle;
 /* 同时利用IDLE中断实现不定长数据的传输 */
 #define COMMUCATION_PROTOCOL_FRAME_SIZE UART_RECEIVE_BUFFER_SIZE /* 串口通信过程中,一个数据帧的大小 */
 void commucation_task(void *pvParameters);
+
+/* 用于LED检验的宏定义 */
+#define TEST_LED_RGB
 #endif //!__COMMUCATION__H__
