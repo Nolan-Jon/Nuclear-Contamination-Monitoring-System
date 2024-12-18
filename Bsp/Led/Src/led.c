@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-17 14:54:59
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-17 22:38:54
+ * @LastEditTime: 2024-12-18 10:21:06
  * @Description: led.c
  *               板载一个RGB灯,无其他可配置LED灯,RGB配置有三个引脚R:PD13/G:PD14/B:PD15
  *               通过控制R/G/B产生不同的取值,进而控制最终显示的颜色
@@ -29,12 +29,12 @@ void led_init(void)
     /* 开启PWM */
     /* 在RTOS之前调用初始化 */
     /* 初始时将比较值设置为0 */
-    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, 0);
-    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_3, 0);
-    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, 0);
-    HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2); /* 使能通道2 */
-    HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3); /* 使能通道3 */
-    HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4); /* 使能通道4 */
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_R_CHANNEL, 0);
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_G_CHANNEL, 0);
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_B_CHANNEL, 0);
+    HAL_TIM_PWM_Start(&htim4, TIM_R_CHANNEL); /* 使能通道2 */
+    HAL_TIM_PWM_Start(&htim4, TIM_G_CHANNEL); /* 使能通道3 */
+    HAL_TIM_PWM_Start(&htim4, TIM_B_CHANNEL); /* 使能通道4 */
 }
 /**
  * @description: 创建led灯实例对象
@@ -64,7 +64,13 @@ LED_InstanceHandle Y_led_creat_instance(uint8_t idx, uint32_t color)
     taskENTER_CRITICAL();
     /* 使用线程安全的内存分配函数 */
     LED_InstanceHandle led_instance_handle = (LED_InstanceHandle)pvPortMalloc(sizeof(LED_InstanceDef));
-
+    if (led_instance_handle == NULL)
+    {
+        LOGERROR("[led_create]LED Instance Create Failed,Stack Overflow!\r\n");
+        /* 退出临界区 */
+        taskEXIT_CRITICAL();
+        return NULL;
+    }
     led_instance_handle->idx = idx;
     led_instance_handle->color = color;
     led_instance_handle->light_time = 0;    /* 初始化为0,不发声 */
@@ -115,9 +121,9 @@ void led_start(LED_InstanceHandle led_instance_handle, uint16_t light_time, uint
     led_instance_handle->state_flag = LED_STATE_RUN; /* LED处于运行态 */
     led_instance_handle->enable_flag = LED_ENABLE;   /* 使能LED */
 
-    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, led_instance_handle->R_channel);
-    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_3, led_instance_handle->G_channel);
-    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, led_instance_handle->B_channel);
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_R_CHANNEL, led_instance_handle->R_channel);
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_G_CHANNEL, led_instance_handle->G_channel);
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_B_CHANNEL, led_instance_handle->B_channel);
 }
 /**
  * @description: 该函数作为LED的控制函数,创建一个硬件定时器负责调用该函数,每200ms调用一次,用于控制LED的闪烁

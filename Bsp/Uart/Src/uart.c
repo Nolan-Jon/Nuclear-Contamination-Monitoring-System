@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-12 21:33:51
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-17 20:17:17
+ * @LastEditTime: 2024-12-18 12:14:01
  * @Description: uart.c
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -90,10 +90,10 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
  * @description: 应用层函数,创建串口实例
  * @return {*}
  */
-UART_InstanceHandle Y_uart_create_instance(uint8_t instance_num,                       /* 串口实例编号,支持0 ~ 1 */
-                                           uint16_t recv_buffer_size,                  /* 串口接受一包数据大小 */
-                                           UART_HandleTypeDef *uartHandle,             /* 串口实例对应的设备句柄 */
-                                           uart_recv_decode uart_recv_decode_callback) /* 解析回调函数 */
+UART_InstanceHandle Y_uart_create_instance(uint8_t instance_num,                                /* 串口实例编号,支持0 ~ 1 */
+                                           uint16_t recv_buffer_size,                           /* 串口接受一包数据大小 */
+                                           UART_HandleTypeDef *uartHandle,                      /* 串口实例对应的设备句柄 */
+                                           uart_recv_decode_callback uart_recv_decode_callback) /* 解析回调函数 */
 {
     /* 检测串口编号是否非法 */
     if (instance_num > DEVICE_UART_NUM)
@@ -115,7 +115,13 @@ UART_InstanceHandle Y_uart_create_instance(uint8_t instance_num,                
     taskENTER_CRITICAL();
     /* 使用线程安全的内存分配函数 */
     UART_InstanceHandle uart_instance_handle = (UART_InstanceHandle)pvPortMalloc(sizeof(UART_InstanceDef));
-
+    if (uart_instance_handle == NULL)
+    {
+        LOGERROR("[uart_create]UART Instance Create Failed,Stack Overflow!\r\n");
+        /* 退出临界区 */
+        taskEXIT_CRITICAL();
+        return NULL;
+    }
     uart_instance_handle->uartHandle = uartHandle;
     uart_instance_handle->idx = instance_num;
     uart_instance_handle->recv_buffer_size = recv_buffer_size;

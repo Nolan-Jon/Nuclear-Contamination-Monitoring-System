@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-17 14:54:44
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-17 19:56:01
+ * @LastEditTime: 2024-12-18 10:34:18
  * @Description: led.h
  *               RGB颜色参考:https://tool.oschina.net/commons?type=3
  *
@@ -26,6 +26,10 @@
 #define LED_DISABLE 0      /* LED实例失能 */
 #define LED_STATE_RUN 1    /* LED状态为运行 */
 #define LED_STATE_STOP 2   /* LED状态为停止 */
+
+#define TIM_R_CHANNEL TIM_CHANNEL_3
+#define TIM_G_CHANNEL TIM_CHANNEL_2
+#define TIM_B_CHANNEL TIM_CHANNEL_4
 /* RGB结构体定义 */
 typedef struct
 {
