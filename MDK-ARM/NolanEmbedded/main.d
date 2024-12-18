@@ -42,7 +42,7 @@ nolanembedded\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 nolanembedded\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdarg.h
 nolanembedded\main.o: ../Bsp/Beep/Inc/beep.h
 nolanembedded\main.o: ../Bsp/Led/Inc/led.h
-nolanembedded\main.o: ..\Bsp\Daemon\Inc\daemon.h
+nolanembedded\main.o: ../Bsp/Daemon/Inc/daemon.h
 nolanembedded\main.o: ../Middleware/FreeRTOS/Inc/FreeRTOS.h
 nolanembedded\main.o: ../Inc/FreeRTOSConfig.h
 nolanembedded\main.o: ../Middleware/FreeRTOS/Inc/projdefs.h

@@ -43,7 +43,7 @@ nolanembedded\led.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 nolanembedded\led.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 nolanembedded\led.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 nolanembedded\led.o: ../Inc/tim.h
-nolanembedded\led.o: ..\Bsp\Daemon\Inc\daemon.h
+nolanembedded\led.o: ../Bsp/Daemon/Inc/daemon.h
 nolanembedded\led.o: ../Middleware/FreeRTOS/Inc/timers.h
 nolanembedded\led.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
 nolanembedded\led.o: ../Bsp/RTT/Inc/rtt.h

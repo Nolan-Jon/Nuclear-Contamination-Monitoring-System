@@ -50,4 +50,4 @@ nolanembedded\freertos_start.o: ../Bsp/RTT/Inc/SEGGER_RTT.h
 nolanembedded\freertos_start.o: ../Bsp/RTT/Inc/SEGGER_RTT_Conf.h
 nolanembedded\freertos_start.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 nolanembedded\freertos_start.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdarg.h
-nolanembedded\freertos_start.o: ..\Bsp\Daemon\Inc\daemon.h
+nolanembedded\freertos_start.o: ../Bsp/Daemon/Inc/daemon.h

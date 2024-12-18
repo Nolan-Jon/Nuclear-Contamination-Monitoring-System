@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-17 14:54:44
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-18 14:39:57
+ * @LastEditTime: 2024-12-18 20:07:50
  * @Description: led.h
  *               RGB颜色参考:https://tool.oschina.net/commons?type=3
  *
@@ -50,4 +50,24 @@ typedef LED_InstanceDef *LED_InstanceHandle;
 void led_init(void);
 LED_InstanceHandle Y_led_creat_instance(uint8_t idx, uint32_t color);
 void led_start(LED_InstanceHandle led_instance_handle, uint16_t all_flash_cnt);
+
+/*--------------------------------------------------ws2812b驱动接口--------------------------------------------------*/
+/**
+ * 24码(24字节)协议结构:
+ *                    | G7 | G6 | G5 | G4 | G3 | G2 | G1 | G0 |
+ *                    | R7 | R6 | R5 | R4 | R3 | R2 | R1 | R0 |
+ *                    | B7 | B6 | B5 | B4 | B3 | B2 | B1 | B0 |
+ * 发送顺序:按照GRB的顺序发送(G7->G6->G5->......B0)
+ */
+
+#define WS_0 0x46                                 /* WS2812B协议对应的0码 */
+#define WS_1 0x8C                                 /* WS2812B协议对应的1码 */
+#define LAMP_NUM 58                               /* 灯珠的数量 */
+#define WS2812B_DATA_LENGTH (LAMP_NUM * 24 + 300) /* 300是复位脉冲数 */
+
+#define TEST_WS2812B_LAMP /* 测试WS2812B的宏定义 */
+void ws2812b_init(void);
+void ws2812b_load_data(void);
+void ws2812b_close_lamp(void);
+void ws2812b_write_color(uint32_t color);
 #endif //!__LED__H__

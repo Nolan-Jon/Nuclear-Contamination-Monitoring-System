@@ -1,5 +1,5 @@
 nolanembedded\daemon.o: ..\Bsp\Daemon\Src\daemon.c
-nolanembedded\daemon.o: ..\Bsp\Daemon\Inc\daemon.h
+nolanembedded\daemon.o: ../Bsp/Daemon/Inc/daemon.h
 nolanembedded\daemon.o: ../Middleware/FreeRTOS/Inc/FreeRTOS.h
 nolanembedded\daemon.o: D:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
 nolanembedded\daemon.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdint.h

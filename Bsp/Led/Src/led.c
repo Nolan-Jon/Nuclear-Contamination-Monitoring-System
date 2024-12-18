@@ -2,9 +2,9 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-17 14:54:59
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-18 15:47:54
+ * @LastEditTime: 2024-12-18 20:29:58
  * @Description: led.c
- *               板载一个RGB灯,无其他可配置LED灯,RGB配置有三个引脚R:PD13/G:PD14/B:PD15
+ *               板载一个RGB灯,无其他可配置LED灯,RGB配置有三个引脚R:PD14/G:PD13/B:PD15
  *               通过控制R/G/B产生不同的取值,进而控制最终显示的颜色
  *               使用16色表示实际的RGB颜色,通过宏定义的方式实现,通过位运算取出R/G/B三个值
  *
@@ -18,6 +18,7 @@
 #include "stdlib.h"
 #include "portable.h"
 static LED_InstanceHandle led_instance_array[INSTANCE_LED_NUM] = {NULL};
+static uint8_t WS2812B_LAMP_DATA[WS2812B_DATA_LENGTH] = {0};
 /**
  * @description: 初始化led灯
  * @return {*}
@@ -83,7 +84,7 @@ void led_daemon_control_callback(void *daemon_instance_handle)
         else /* 闪烁 */
         {
             /* 闪烁周期是400ms */
-            h_led->state ?  close_led() : open_led(h_led);
+            h_led->state ? close_led() : open_led(h_led);
             /* 状态取反 */
             h_led->state ^= 0x01;
             h_led->all_flash_cnt--;
@@ -164,4 +165,96 @@ void led_start(LED_InstanceHandle led_instance_handle, uint16_t all_flash_cnt)
     led_instance_handle->all_flash_cnt = all_flash_cnt;
     led_instance_handle->flash_cnt = 0;
     led_instance_handle->enable_flag = LED_ENABLE; /* LED处于运行态 */
+}
+
+/*--------------------------------------------------ws2812b驱动接口--------------------------------------------------*/
+/**
+ * @description: WS2812B相关代码,目标:做成呼吸灯
+ *               无法通过占空比的方式实现呼吸效果,因此选择RGB色盘实现呼吸效果
+ *               启用TIM1的Channel4,一个方波的频率是800KHz,即1.25us
+ *               TIM1的重载值是210,1/3即70,同时TIM1设置为PWM模式1,由于DMA向TIM1发送比较值,因此我们需要配置比较值
+ *               例如,在当前配置下向TIM1发送数据70,即将比较值设置为70,表示产生一个占空比为1/3的频率为800KHz的方波,"持续一个周期"
+ *               0码:占空比为1/3的800KHz的方波,对应的数据0x46,即70
+ *               1码:占空比为2/3的800KHz的方波,对应的数据0x8C,即140
+ *               从上面的分析可以看出发送ws2812b协议的1码需要实际一字节数据,一个灯珠需要24码数据,即24字节数据,这是一个不小的体量
+ * @return {*}
+ */
+void ws2812b_init(void)
+{
+    LOGINFO("-------Use WS2812B.\r\n");
+    ws2812b_close_lamp();
+    ws2812b_load_data();
+}
+/**
+ * @description: 开启DMA,向定时器写入比较值,即将数据写入到ws2812b中
+ * @return {*}
+ */
+void ws2812b_load_data(void)
+{
+    HAL_TIM_PWM_Start_DMA(&htim1, TIM_CHANNEL_4, (uint32_t *)WS2812B_LAMP_DATA, WS2812B_DATA_LENGTH);
+}
+/**
+ * @description: 关闭所有的灯珠
+ * @return {*}
+ */
+void ws2812b_close_lamp(void)
+{
+    uint16_t i = 0;
+    /* 写入#000000(黑色) */
+    for (; i < LAMP_NUM * 24; i++)
+    {
+        WS2812B_LAMP_DATA[i] = WS_0;
+    }
+
+    /* 写入复位脉冲 */
+    for (i = LAMP_NUM * 24; i < WS2812B_DATA_LENGTH; i++)
+    {
+        WS2812B_LAMP_DATA[i] = 0; /* 全0复位脉冲 */
+    }
+}
+/**
+ * @description: 向数组中写入颜色数据
+ * @param {uint32_t} color
+ * @return {*}
+ */
+void ws2812b_write_color(uint32_t color)
+{
+    uint8_t decode_data[24] = {0};
+    uint8_t ws_R_channel = color >> 16;
+    uint8_t ws_G_channel = color >> 8;
+    uint8_t ws_B_channel = color;
+
+    /* 解码G */
+    for (uint8_t i = 0; i < 8; i++)
+    {
+        decode_data[i] = ((ws_G_channel & 0x80) ? WS_1 : WS_0);
+        ws_G_channel <<= 1;
+    }
+    /* 解码R */
+    for (uint8_t i = 0; i < 8; i++)
+    {
+        decode_data[i + 8] = ((ws_R_channel & 0x80) ? WS_1 : WS_0);
+        ws_R_channel <<= 1;
+    }
+    /* 解码B */
+    for (uint8_t i = 0; i < 8; i++)
+    {
+        decode_data[i + 16] = ((ws_B_channel & 0x80) ? WS_1 : WS_0);
+        ws_B_channel <<= 1;
+    }
+    
+    /* 写入数组 */
+    for (uint16_t i = 0; i < LAMP_NUM; i++)
+    {
+        for (uint8_t j = 0; j < 24; j++)
+        {
+            WS2812B_LAMP_DATA[24 * i + j] = decode_data[j];
+        }
+    }
+
+    /* 写入复位脉冲 */
+    for (uint16_t i = LAMP_NUM * 24; i < WS2812B_DATA_LENGTH; i++)
+    {
+        WS2812B_LAMP_DATA[i] = 0;
+    }
 }
