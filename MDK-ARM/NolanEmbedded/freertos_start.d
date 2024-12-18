@@ -11,6 +11,7 @@ nolanembedded\freertos_start.o: ../Middleware/FreeRTOS/Port/portmacro.h
 nolanembedded\freertos_start.o: ../Middleware/FreeRTOS/Inc/mpu_wrappers.h
 nolanembedded\freertos_start.o: ../Middleware/FreeRTOS/Inc/task.h
 nolanembedded\freertos_start.o: ../Middleware/FreeRTOS/Inc/list.h
+nolanembedded\freertos_start.o: ../Middleware/FreeRTOS/Inc/timers.h
 nolanembedded\freertos_start.o: ../Application/commucation/Inc/commucation.h
 nolanembedded\freertos_start.o: ../Bsp/Uart/Inc/uart.h
 nolanembedded\freertos_start.o: ../Inc/usart.h
@@ -49,3 +50,4 @@ nolanembedded\freertos_start.o: ../Bsp/RTT/Inc/SEGGER_RTT.h
 nolanembedded\freertos_start.o: ../Bsp/RTT/Inc/SEGGER_RTT_Conf.h
 nolanembedded\freertos_start.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 nolanembedded\freertos_start.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdarg.h
+nolanembedded\freertos_start.o: ..\Bsp\Daemon\Inc\daemon.h

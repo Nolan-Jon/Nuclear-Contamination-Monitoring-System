@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-13 14:38:45
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-17 22:09:23
+ * @LastEditTime: 2024-12-18 14:39:18
  * @Description: commucation.c 上位机通信文件
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -260,9 +260,7 @@ void commucation_task(void *pvParameters)
     commucation_uart_handle = Y_uart_create_instance(IDX_OF_UART_DEVICE_3, COMMUCATION_PROTOCOL_FRAME_SIZE, &huart3, commucation_message_decode);
 #ifdef TEST_LED_RGB
     /* LED测试 */
-    commucation_led_instance_handle = Y_led_creat_instance(0, Turquoise1);
-    /* 注意更改参数 */
-    led_start(commucation_led_instance_handle, 0, 0, 0);
+    commucation_led_instance_handle = Y_led_creat_instance(0, Firebrick);
 #endif // TEST_LED_RGB
     uint32_t heart_count = 0;
     TickType_t xLastWakeTime = 0;
@@ -273,6 +271,9 @@ void commucation_task(void *pvParameters)
     {
         /* 每隔5s打印一次心跳包 */
         LOGINFO("Heart %d\n\r", heart_count++);
+#ifdef TEST_LED_RGB
+        led_start(commucation_led_instance_handle, 5);
+#endif // TEST_LED_RGB
         xTaskDelayUntil(&xLastWakeTime, xDelay1ms * 1000);
     }
 }

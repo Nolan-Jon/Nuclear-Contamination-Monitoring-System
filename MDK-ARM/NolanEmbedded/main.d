@@ -42,11 +42,9 @@ nolanembedded\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 nolanembedded\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdarg.h
 nolanembedded\main.o: ../Bsp/Beep/Inc/beep.h
 nolanembedded\main.o: ../Bsp/Led/Inc/led.h
-nolanembedded\main.o: ../Application/commucation/Inc/commucation.h
-nolanembedded\main.o: ../Inc/FreeRTOSConfig.h
-nolanembedded\main.o: ../Bsp/Uart/Inc/uart.h
-nolanembedded\main.o: ../Inc/freertos_start.h
+nolanembedded\main.o: ..\Bsp\Daemon\Inc\daemon.h
 nolanembedded\main.o: ../Middleware/FreeRTOS/Inc/FreeRTOS.h
+nolanembedded\main.o: ../Inc/FreeRTOSConfig.h
 nolanembedded\main.o: ../Middleware/FreeRTOS/Inc/projdefs.h
 nolanembedded\main.o: ../Middleware/FreeRTOS/Inc/portable.h
 nolanembedded\main.o: ../Middleware/FreeRTOS/Inc/deprecated_definitions.h
@@ -54,3 +52,7 @@ nolanembedded\main.o: ../Middleware/FreeRTOS/Port/portmacro.h
 nolanembedded\main.o: ../Middleware/FreeRTOS/Inc/mpu_wrappers.h
 nolanembedded\main.o: ../Middleware/FreeRTOS/Inc/task.h
 nolanembedded\main.o: ../Middleware/FreeRTOS/Inc/list.h
+nolanembedded\main.o: ../Middleware/FreeRTOS/Inc/timers.h
+nolanembedded\main.o: ../Application/commucation/Inc/commucation.h
+nolanembedded\main.o: ../Bsp/Uart/Inc/uart.h
+nolanembedded\main.o: ../Inc/freertos_start.h

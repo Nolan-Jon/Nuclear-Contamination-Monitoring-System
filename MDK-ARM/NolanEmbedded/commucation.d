@@ -54,3 +54,5 @@ nolanembedded\commucation.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
 nolanembedded\commucation.o: ../Bsp/Led/Inc/led.h
 nolanembedded\commucation.o: ../Inc/gpio.h
 nolanembedded\commucation.o: ../Inc/tim.h
+nolanembedded\commucation.o: ..\Bsp\Daemon\Inc\daemon.h
+nolanembedded\commucation.o: ../Middleware/FreeRTOS/Inc/timers.h

@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-17 14:54:59
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-18 10:21:06
+ * @LastEditTime: 2024-12-18 15:47:54
  * @Description: led.c
  *               板载一个RGB灯,无其他可配置LED灯,RGB配置有三个引脚R:PD13/G:PD14/B:PD15
  *               通过控制R/G/B产生不同的取值,进而控制最终显示的颜色
@@ -35,6 +35,61 @@ void led_init(void)
     HAL_TIM_PWM_Start(&htim4, TIM_R_CHANNEL); /* 使能通道2 */
     HAL_TIM_PWM_Start(&htim4, TIM_G_CHANNEL); /* 使能通道3 */
     HAL_TIM_PWM_Start(&htim4, TIM_B_CHANNEL); /* 使能通道4 */
+}
+/**
+ * @description: 私有函数,硬件上打开LED灯
+ * @param {LED_InstanceHandle} led_instance_handle
+ * @return {*}
+ */
+static void open_led(LED_InstanceHandle led_instance_handle)
+{
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_R_CHANNEL, led_instance_handle->R_channel);
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_G_CHANNEL, led_instance_handle->G_channel);
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_B_CHANNEL, led_instance_handle->B_channel);
+}
+
+/**
+ * @description: 私有函数,硬件上关闭LED灯
+ * @return {*}
+ */
+static void close_led(void)
+{
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_R_CHANNEL, 0);
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_G_CHANNEL, 0);
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_B_CHANNEL, 0);
+}
+/**
+ * @description: 该函数作为LED的控制函数,是守护实例的回调函数:每隔200ms调用一次该函数
+ *               调用该函数时需要进入临界区
+ * @return {*}
+ */
+void led_daemon_control_callback(void *daemon_instance_handle)
+{
+    /* 拿取对应的Daemon实例句柄 */
+    Daemon_InstanceHandle h_daemon = (Daemon_InstanceHandle)daemon_instance_handle;
+    /* 拿取对应的LED实例句柄 */
+    LED_InstanceHandle h_led = (LED_InstanceHandle)(h_daemon->owner_instance_handle);
+    /* 执行"喂狗"操作 */
+    h_daemon->count = h_daemon->reload_count; /* 重新从重载值向下计数 */
+    /* LED相关操作 */
+    if (h_led->enable_flag == LED_ENABLE)
+    {
+
+        if (h_led->all_flash_cnt <= 0) /* 不闪烁 */
+        {
+            h_led->enable_flag = LED_DIABLE;
+            return;
+        }
+        else /* 闪烁 */
+        {
+            /* 闪烁周期是400ms */
+            h_led->state ?  close_led() : open_led(h_led);
+            /* 状态取反 */
+            h_led->state ^= 0x01;
+            h_led->all_flash_cnt--;
+        }
+    }
+    return;
 }
 /**
  * @description: 创建led灯实例对象
@@ -73,9 +128,9 @@ LED_InstanceHandle Y_led_creat_instance(uint8_t idx, uint32_t color)
     }
     led_instance_handle->idx = idx;
     led_instance_handle->color = color;
-    led_instance_handle->light_time = 0;    /* 初始化为0,不发声 */
-    led_instance_handle->stop_time = 0;     /* 初始化为0,不发声 */
-    led_instance_handle->all_flash_cnt = 0; /* 初始化为0 */
+    led_instance_handle->all_flash_cnt = 0;        /* 初始化为0 */
+    led_instance_handle->enable_flag = LED_DIABLE; /* 初始时LED失能 */
+    led_instance_handle->state = LED_STATE_STOP;   /* 初始时LED熄灭 */
 
     /* 解析RGB值:解析出RBG通道值对应的定时器比较值 */
     uint8_t R = color >> 16; /* 通道取值范围:0 ~ 255 */
@@ -87,6 +142,9 @@ LED_InstanceHandle Y_led_creat_instance(uint8_t idx, uint32_t color)
     led_instance_handle->R_channel = R * 5;
     led_instance_handle->G_channel = G * 5;
     led_instance_handle->B_channel = B * 5;
+
+    /* 注册守护对象 */
+    led_instance_handle->led_daemon = Y_daemon_create_instance((void *)led_instance_handle, DAEMON_OWNER_TYPE_LED, idx, DAEMON_RELOAD_LED, led_daemon_control_callback);
     /* 退出临界区 */
     taskEXIT_CRITICAL();
 
@@ -95,51 +153,15 @@ LED_InstanceHandle Y_led_creat_instance(uint8_t idx, uint32_t color)
 /**
  * @description: 开启LED灯,任务中调用需要进入临界区
  *               若其他任务同样执行LED灯闪烁操作,当前执行的操作将被替换掉
+ *               不支持常亮:后续可提供支持
  * @param {LED_InstanceHandle} led_instance_handle
- * @param {uint16_t} light_time
- * @param {uint16_t} stop_time
  * @param {uint16_t} all_flash_cnt
  * @return {*}
  */
-void led_start(LED_InstanceHandle led_instance_handle, uint16_t light_time, uint16_t stop_time, uint16_t all_flash_cnt)
+void led_start(LED_InstanceHandle led_instance_handle, uint16_t all_flash_cnt)
 {
-    /* 开启当前LED实例之前,需要将其他LED实例失能,且其他LED的操作不可恢复 */
-    /* 确保每一时刻只有一个LED运行 */
-    for (uint8_t i = 0; i < INSTANCE_LED_NUM; i++)
-    {
-        if (led_instance_array[i] != NULL)
-        {
-            led_instance_array[i]->state_flag = LED_STATE_STOP;
-            led_instance_array[i]->enable_flag = LED_DISABLE;
-        }
-    }
     /* 开启当前LED实例 */
-    led_instance_handle->light_time = light_time;
-    led_instance_handle->stop_time = stop_time;
     led_instance_handle->all_flash_cnt = all_flash_cnt;
     led_instance_handle->flash_cnt = 0;
-    led_instance_handle->state_flag = LED_STATE_RUN; /* LED处于运行态 */
-    led_instance_handle->enable_flag = LED_ENABLE;   /* 使能LED */
-
-    __HAL_TIM_SET_COMPARE(&htim4, TIM_R_CHANNEL, led_instance_handle->R_channel);
-    __HAL_TIM_SET_COMPARE(&htim4, TIM_G_CHANNEL, led_instance_handle->G_channel);
-    __HAL_TIM_SET_COMPARE(&htim4, TIM_B_CHANNEL, led_instance_handle->B_channel);
-}
-/**
- * @description: 该函数作为LED的控制函数,创建一个硬件定时器负责调用该函数,每200ms调用一次,用于控制LED的闪烁
- * @return {*}
- */
-void led_control_callback(void)
-{
-    /* 创建LED实例的句柄,放在常量区 */
-    static LED_InstanceHandle led_handle;
-    /* 遍历LED实例的状态 */
-    for (uint8_t i = 0; i < INSTANCE_LED_NUM; i++)
-    {
-        if (led_instance_array[i]->state_flag == LED_STATE_STOP && led_instance_array[i]->enable_flag == LED_DISABLE)
-        {
-            led_handle = led_instance_array[i];
-        }
-    }
-    /* 执行控制操作 */
+    led_instance_handle->enable_flag = LED_ENABLE; /* LED处于运行态 */
 }

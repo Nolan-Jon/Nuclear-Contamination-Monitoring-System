@@ -24,6 +24,8 @@
         "led.h": "c",
         "gpio.h": "c",
         "tim.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "daemon.h": "c",
+        "timers.h": "c"
     }
 }

@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-13 13:38:48
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-16 19:13:27
+ * @LastEditTime: 2024-12-18 15:11:32
  * @Description: freertos_start.c
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -10,8 +10,10 @@
 #include "freertos_start.h"
 #include "commucation.h"
 #include "rtt.h"
+#include "daemon.h"
 TaskHandle_t start_task_handle;
 extern TaskHandle_t commucation_task_handle;
+TimerHandle_t daemon_timer_handle;
 void start_task(void *pvParameters)
 {
     /* 启动任务运行的时候调度器已经启动,由于需要创建其他任务,为了避免错误,需要设置临界区 */
@@ -21,6 +23,10 @@ void start_task(void *pvParameters)
     /* 创建应用级任务 */
     xTaskCreate(commucation_task, "com_task", COMMUCATION_TASK_STACK, NULL, COMMUCATION_TASK_PRIORITY, &commucation_task_handle);
 
+    /* 创建软件定时器Daemon */
+    daemon_timer_handle = xTimerCreate("Daemon", DAEMON_TIMER_PERIOD_TICKS, pdTRUE, (void *)1, deamon_timer_callback); /* pdTRUE循环执行,pdFALSE单次执行*/
+    /* 由于在调度器启动之前开启Timer,函数第二个参数将被忽略 */
+    xTimerStart(daemon_timer_handle, 0);
     /* 删除启动任务自身 */
     vTaskDelete(NULL);
     taskEXIT_CRITICAL();
