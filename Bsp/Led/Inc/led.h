@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-17 14:54:44
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-18 20:07:50
+ * @LastEditTime: 2024-12-19 18:38:27
  * @Description: led.h
  *               RGB颜色参考:https://tool.oschina.net/commons?type=3
  *
@@ -60,14 +60,15 @@ void led_start(LED_InstanceHandle led_instance_handle, uint16_t all_flash_cnt);
  * 发送顺序:按照GRB的顺序发送(G7->G6->G5->......B0)
  */
 
-#define WS_0 0x46                                 /* WS2812B协议对应的0码 */
-#define WS_1 0x8C                                 /* WS2812B协议对应的1码 */
-#define LAMP_NUM 58                               /* 灯珠的数量 */
-#define WS2812B_DATA_LENGTH (LAMP_NUM * 24 + 300) /* 300是复位脉冲数 */
+#define WS_0 (uint16_t)0x46                                 /* WS2812B协议对应的0码:示波器高电平大约270ns */
+#define WS_1 (uint16_t)0x8C                                 /* WS2812B协议对应的1码:示波器高电平大约750ns */
+#define LAMP_NUM 58                                        /* 灯珠的数量 */
+#define WS2812B_DATA_LENGTH (uint16_t)(LAMP_NUM * 24 + 50) /* 50是复位脉冲数:可以继续调节小一点 */
 
 #define TEST_WS2812B_LAMP /* 测试WS2812B的宏定义 */
 void ws2812b_init(void);
-void ws2812b_load_data(void);
 void ws2812b_close_lamp(void);
-void ws2812b_write_color(uint32_t color);
+void ws2812b_breath(void);
+void ws2812b_config_color(uint32_t color);
+
 #endif //!__LED__H__

@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-18 10:39:36
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-18 15:33:05
+ * @LastEditTime: 2024-12-19 22:16:07
  * @Description: daemon.c
  *               该文件实现守护实例的创建操作
  *               注意事项:通过实现一个软件定时器作为守护进程,守护进程维护这些守护实例
@@ -14,6 +14,7 @@
 #include "daemon.h"
 #include "stdlib.h"
 #include "rtt.h"
+#include "led.h"
 #include "portable.h"
 
 /* 创建守护实例的挂载队列 */
@@ -65,9 +66,15 @@ Daemon_InstanceHandle Y_daemon_create_instance(void *owner_instance_handle, uint
 void deamon_timer_callback(TimerHandle_t xTimer)
 {
     /* 遍历deamon队列,执行deamon实例的回调函数 */
-    LOGINFO("Deamon task is running.\r\n");
+    taskENTER_CRITICAL();
+    /* 调用该函数前需要使用ws2812b_config_color函数配置RGB灯带 */
+    /* 最好将配置函数放到ws2812b初始化函数中 */
+    /* 后续可以设计运行中更改颜色的接口 */
+    ws2812b_breath();
+    taskEXIT_CRITICAL();
     for (uint8_t i = 0; i < daemon_instance_count; i++)
     {
+        /* 是否需要进入临界区 */
         daemon_instance_array[i]->callback((void *)daemon_instance_array[i]);
     }
 }
