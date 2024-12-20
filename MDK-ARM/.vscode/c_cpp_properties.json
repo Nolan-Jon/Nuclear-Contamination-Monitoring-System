@@ -17,7 +17,9 @@
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Dwt\\Inc",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Led\\Inc",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Daemon\\Inc",
+                "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\RemoteControl\\Inc",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Application\\commucation\\Inc",
+                "d:\\Files\\Code\\Keil\\NolanEmbedded\\Application\\Chassis\\Inc",
                 "D:\\Keil\\ARM\\ARMCC\\include",
                 "D:\\Keil\\ARM\\ARMCC\\include\\arm_linux",
                 "D:\\Keil\\ARM\\ARMCC\\include\\arm_linux_compat",
@@ -33,7 +35,9 @@
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Dwt\\Src",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Led\\Src",
                 "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\Daemon\\Src",
-                "d:\\Files\\Code\\Keil\\NolanEmbedded\\Application\\commucation\\Src"
+                "d:\\Files\\Code\\Keil\\NolanEmbedded\\Bsp\\RemoteControl\\Src",
+                "d:\\Files\\Code\\Keil\\NolanEmbedded\\Application\\commucation\\Src",
+                "d:\\Files\\Code\\Keil\\NolanEmbedded\\Application\\Chassis\\Src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

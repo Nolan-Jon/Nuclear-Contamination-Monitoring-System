@@ -2,17 +2,19 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-13 13:38:48
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-18 15:11:32
+ * @LastEditTime: 2024-12-20 14:19:03
  * @Description: freertos_start.c
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
  */
 #include "freertos_start.h"
 #include "commucation.h"
+#include "chassis.h"
 #include "rtt.h"
 #include "daemon.h"
 TaskHandle_t start_task_handle;
 extern TaskHandle_t commucation_task_handle;
+extern TaskHandle_t chassis_task_handle;
 TimerHandle_t daemon_timer_handle;
 void start_task(void *pvParameters)
 {
@@ -21,8 +23,8 @@ void start_task(void *pvParameters)
     /* 进入临界区 */
     taskENTER_CRITICAL();
     /* 创建应用级任务 */
-    xTaskCreate(commucation_task, "com_task", COMMUCATION_TASK_STACK, NULL, COMMUCATION_TASK_PRIORITY, &commucation_task_handle);
-
+    xTaskCreate(commucation_task, "com", COMMUCATION_TASK_STACK, NULL, COMMUCATION_TASK_PRIORITY, &commucation_task_handle);
+    xTaskCreate(chassis_task, "chassis", CHASSIS_TASK_STACK, NULL, CHASSIS_TASK_PRIORITY, &chassis_task_handle);
     /* 创建软件定时器Daemon */
     daemon_timer_handle = xTimerCreate("Daemon", DAEMON_TIMER_PERIOD_TICKS, pdTRUE, (void *)1, deamon_timer_callback); /* pdTRUE循环执行,pdFALSE单次执行*/
     /* 由于在调度器启动之前开启Timer,函数第二个参数将被忽略 */

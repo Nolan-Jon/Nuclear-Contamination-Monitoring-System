@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-12 21:34:06
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-18 16:13:39
+ * @LastEditTime: 2024-12-20 13:20:39
  * @Description: uart.h
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -13,10 +13,11 @@
 #include "usart.h"
 /* 创建串口实例结构体,把每个串口都当成一个实例对象,即一个串口设备对应一个串口对象 */
 /* 串口是独占的点对点通信,不存在多个设备同时占用一个串口的情况 */
-#define DEVICE_UART_NUM 3            /* 开发板上只有两个可用串口,从0开始算 */
+#define DEVICE_UART_NUM 3            /* 表示3个可用串口: */
 #define UART_RECEIVE_BUFFER_SIZE 256 /* 接受缓冲区的大小 */
-#define IDX_OF_UART_DEVICE_1 0       /* 串口0对应的编号 */
+#define IDX_OF_UART_DEVICE_1 0       /* 串口0对应的编号:可以配置成vofa的串口 */
 #define IDX_OF_UART_DEVICE_3 1       /* 串口3对应的编号:用于和上位机通信 */
+#define IDX_OF_UART_DEVICE_5 2       /* 串口5对应的编号:用于SBUS接口,和遥控器通信 */
 
 typedef void (*uart_recv_decode_callback)(uint8_t *buffer, uint16_t Size); /* 解析接受串口数据的函数指针,做结构体的回调函数*/
 

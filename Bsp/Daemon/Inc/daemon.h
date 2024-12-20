@@ -20,14 +20,14 @@
 
 /* 重载值选择 */
 #define DAEMON_RELOAD_LED   4 /* LED类型的守护实例重载值:守护进程每50ms执行一次,而LED的回调函数要求200ms调用一次 */
-
+#define DAEMON_RELOD_RC     3 /* RC的daemon回调函数150ms执行一次,判断遥控器是否在线 */
 typedef void (*daemon_timeout_callback)(void *);
 typedef struct
 {
     /* data */
     uint8_t owner_type;               /* 拥有者的类型 */
     uint8_t owner_idx;                /* 拥有者的编号 */
-    uint16_t reload_count;            /* daemon维护的计数重载值:计数值从重载值减到0会触发超时回调函数 */
+    uint16_t reload_count;            /* daemon维护的计数重载值:计数值从重载值减到0会触发超时回调函数:重载值为0时表示跟随守护进程执行(进入守护进程任务就会执行一次) */
     uint16_t count;                   /* 计数值:从上到下计数 */
     daemon_timeout_callback callback; /* 守护超时回调函数 */
     void *owner_instance_handle;      /* 拥有者的实例句柄(需要强制转换成所需类型) */

@@ -97,6 +97,7 @@ int main(void)
   MX_USART3_UART_Init();
   MX_TIM4_Init();
   MX_TIM1_Init();
+  MX_UART5_Init();
   /* USER CODE BEGIN 2 */
   beep_init();
   rtt_log_init();
@@ -124,6 +125,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

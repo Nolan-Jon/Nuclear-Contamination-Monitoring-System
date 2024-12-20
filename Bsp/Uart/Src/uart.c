@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-12 21:33:51
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-18 12:14:01
+ * @LastEditTime: 2024-12-20 13:27:33
  * @Description: uart.c
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -22,7 +22,7 @@ static UART_InstanceHandle uart_instance_array[DEVICE_UART_NUM] = {NULL}; /* 挂
 static void uart_service_start(UART_InstanceHandle uart_instance_handle)
 {
 
-    /* 注意,虽然使用DMA进行数据传输,但是串口空闲中断依赖UART全局中断,注意开启UART全局中断*/
+    /* 注意,虽然使用DMA进行数据传输,但是串口空闲中断依赖UART全局中断,注意开启UART全局中断 */
     HAL_UARTEx_ReceiveToIdle_DMA(uart_instance_handle->uartHandle, uart_instance_handle->recv_buffer, uart_instance_handle->recv_buffer_size);
     /* 该函数会调用UART_Start_Receive_DMA开启串口的DMA接收,该函数会配置三种回调函数,同时开启DMA中断 */
     /* DMA传输完成回调函数、DMA半传输完成回调函数、DMA传输错误回调函数 */
@@ -90,8 +90,8 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
  * @description: 应用层函数,创建串口实例
  * @return {*}
  */
-UART_InstanceHandle Y_uart_create_instance(uint8_t instance_num,                                /* 串口实例编号,支持0 ~ 1 */
-                                           uint16_t recv_buffer_size,                           /* 串口接受一包数据大小 */
+UART_InstanceHandle Y_uart_create_instance(uint8_t instance_num,                                /* 串口实例编号,支持0 ~ 2 */
+                                           uint16_t recv_buffer_size,                           /* 串口接受一帧数据大小 */
                                            UART_HandleTypeDef *uartHandle,                      /* 串口实例对应的设备句柄 */
                                            uart_recv_decode_callback uart_recv_decode_callback) /* 解析回调函数 */
 {

@@ -45,7 +45,9 @@
 "nolanembedded\dwt.o"
 "nolanembedded\led.o"
 "nolanembedded\daemon.o"
+"nolanembedded\rc.o"
 "nolanembedded\commucation.o"
+"nolanembedded\chassis.o"
 --strict --scatter "NolanEmbedded\NolanEmbedded.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

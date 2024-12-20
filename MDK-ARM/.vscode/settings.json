@@ -26,6 +26,8 @@
         "tim.h": "c",
         "stdlib.h": "c",
         "daemon.h": "c",
-        "timers.h": "c"
+        "timers.h": "c",
+        "rc.h": "c",
+        "chassis.h": "c"
     }
 }

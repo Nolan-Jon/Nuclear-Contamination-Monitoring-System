@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-13 14:38:45
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-18 14:39:18
+ * @LastEditTime: 2024-12-20 12:55:38
  * @Description: commucation.c 上位机通信文件
  *
  * Copyright (c) 2024 by https://github.com/Nolan-Jon, All Rights Reserved.
@@ -118,7 +118,7 @@ uint8_t protocol_head_check(Commucation_ProtocolHandle message, uint8_t *rx_buff
  * @param {uint16_t} pack_num
  * @return {*}
  */
-static void commucation_message_decode(uint8_t *rx_buffer, uint16_t frame_length)
+static void commucation_message_decode_callback(uint8_t *rx_buffer, uint16_t frame_length)
 {
 #ifdef __EASY_PRINT_TEST
     rtt_str_to_hex(rx_buffer, frame_length);
@@ -257,7 +257,7 @@ void commucation_task(void *pvParameters)
     message_handle = (Commucation_ProtocolHandle)pvPortMalloc(sizeof(Commucation_ProtocolDef));
     /* 创建串口实例,负责接受上位机的消息 */
     /* 串口实例本质上靠DMA中断处理,因此不属于任务体系,可以考虑作为硬件系统任务处理 */
-    commucation_uart_handle = Y_uart_create_instance(IDX_OF_UART_DEVICE_3, COMMUCATION_PROTOCOL_FRAME_SIZE, &huart3, commucation_message_decode);
+    commucation_uart_handle = Y_uart_create_instance(IDX_OF_UART_DEVICE_3, COMMUCATION_PROTOCOL_FRAME_SIZE, &huart3, commucation_message_decode_callback);
 #ifdef TEST_LED_RGB
     /* LED测试 */
     commucation_led_instance_handle = Y_led_creat_instance(0, Firebrick);
@@ -269,10 +269,11 @@ void commucation_task(void *pvParameters)
     xLastWakeTime = xTaskGetTickCount();
     while (1)
     {
-        /* 每隔5s打印一次心跳包 */
+        /* 每隔1s打印一次心跳包 */
         LOGINFO("Heart %d\n\r", heart_count++);
 #ifdef TEST_LED_RGB
-        led_start(commucation_led_instance_handle, 5);
+        /* 每隔1s闪烁3次,表征通信正常 */
+        led_start(commucation_led_instance_handle, 3);
 #endif // TEST_LED_RGB
         xTaskDelayUntil(&xLastWakeTime, xDelay1ms * 1000);
     }

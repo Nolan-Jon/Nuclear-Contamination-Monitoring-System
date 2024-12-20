@@ -45,9 +45,11 @@ nolanembedded\freertos_start.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ha
 nolanembedded\freertos_start.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 nolanembedded\freertos_start.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 nolanembedded\freertos_start.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+nolanembedded\freertos_start.o: ..\Application\Chassis\Inc\chassis.h
+nolanembedded\freertos_start.o: ..\Bsp\RemoteControl\Inc\rc.h
+nolanembedded\freertos_start.o: ../Bsp/Daemon/Inc/daemon.h
 nolanembedded\freertos_start.o: ../Bsp/RTT/Inc/rtt.h
 nolanembedded\freertos_start.o: ../Bsp/RTT/Inc/SEGGER_RTT.h
 nolanembedded\freertos_start.o: ../Bsp/RTT/Inc/SEGGER_RTT_Conf.h
 nolanembedded\freertos_start.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 nolanembedded\freertos_start.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdarg.h
-nolanembedded\freertos_start.o: ../Bsp/Daemon/Inc/daemon.h

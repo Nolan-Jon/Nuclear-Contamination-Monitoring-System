@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-18 10:39:36
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-19 22:16:07
+ * @LastEditTime: 2024-12-20 13:52:02
  * @Description: daemon.c
  *               该文件实现守护实例的创建操作
  *               注意事项:通过实现一个软件定时器作为守护进程,守护进程维护这些守护实例
@@ -24,7 +24,7 @@ static uint8_t daemon_instance_count = 0; /* 当前的daemon实例数量 */
  * @description: 创建守护实例进程
  * @param {void} *owner_instance_handle
  * @param {uint8_t} owner_type
- * @param {uint8_t} owner_id
+ * @param {uint8_t} owner_id:从0开始
  * @param {uint16_t} reload_count
  * @param {daemon_timeout_callback} callback
  * @return {*}
@@ -74,7 +74,17 @@ void deamon_timer_callback(TimerHandle_t xTimer)
     taskEXIT_CRITICAL();
     for (uint8_t i = 0; i < daemon_instance_count; i++)
     {
-        /* 是否需要进入临界区 */
-        daemon_instance_array[i]->callback((void *)daemon_instance_array[i]);
+        /* 判断是否计数到重载值:0触发 */
+        if (daemon_instance_array[i]->count == 0)
+        {
+            /* 计数达到重载值 */
+            /* 是否需要进入临界区 */
+            daemon_instance_array[i]->callback((void *)daemon_instance_array[i]);
+        }
+        else
+        {
+            /* 递减计数值 */
+            daemon_instance_array[i]->count--;
+        }
     }
 }

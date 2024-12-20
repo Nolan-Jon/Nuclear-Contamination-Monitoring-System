@@ -2,7 +2,7 @@
  * @Author: Hengyang Jiang
  * @Date: 2024-12-17 14:54:59
  * @LastEditors: Hengyang Jiang
- * @LastEditTime: 2024-12-19 22:21:00
+ * @LastEditTime: 2024-12-20 13:31:42
  * @Description: led.c
  *               板载一个RGB灯,无其他可配置LED灯,RGB配置有三个引脚R:PD14/G:PD13/B:PD15
  *               通过控制R/G/B产生不同的取值,进而控制最终显示的颜色
@@ -147,7 +147,7 @@ LED_InstanceHandle Y_led_creat_instance(uint8_t idx, uint32_t color)
     led_instance_handle->G_channel = G * 5;
     led_instance_handle->B_channel = B * 5;
 
-    /* 注册守护对象 */
+    /* 注册守护对象:led的守护对象负责执行led的闪烁操作 */
     led_instance_handle->led_daemon = Y_daemon_create_instance((void *)led_instance_handle, DAEMON_OWNER_TYPE_LED, idx, DAEMON_RELOAD_LED, led_daemon_control_callback);
     /* 退出临界区 */
     taskEXIT_CRITICAL();

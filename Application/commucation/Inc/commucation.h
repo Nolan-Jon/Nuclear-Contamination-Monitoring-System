@@ -11,8 +11,9 @@
 #define __COMMUCATION__H__
 #include "FreeRTOSConfig.h"
 #include "uart.h"
+/* commucation任务配置宏 */
 #define COMMUCATION_TASK_STACK (configMINIMAL_STACK_SIZE * 2)
-#define COMMUCATION_TASK_PRIORITY (configMAX_PRIORITIES - 2)
+#define COMMUCATION_TASK_PRIORITY (configMAX_PRIORITIES - 2) /* 当前优先级为3 */
 
 /* 串口通信协议封装方式 */
 /**
